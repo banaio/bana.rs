@@ -1,5 +1,7 @@
 # The URL the site will be built for
 base_url = "https://bana.rs"
+title = "bana-rs"
+description = ""
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
@@ -11,5 +13,12 @@ highlight_code = true
 # Whether to build a search index to be used later on by a JavaScript library
 # build_search_index = true
 
+theme = "hyde"
 [extra]
-# Put all your custom variables here
+hyde_links = [
+    {url = "https://github.com/banaio/bana.rs", name = "bana.rs"},
+]
+hyde_theme = "theme-base-08"
+hyde_reverse = true
+
+# https://github.com/getzola/hyde
