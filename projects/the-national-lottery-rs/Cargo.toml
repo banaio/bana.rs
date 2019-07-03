@@ -1,0 +1,13 @@
+[package]
+name = "the-national-lottery-rs"
+version = "0.1.0"
+authors = ["Mohamed Bana <m@bana.io>"]
+edition = "2018"
+
+[dependencies]
+rand = "0.7.0"
+termion = "1.5.3"
+env_logger = "0.6.2"
+log = "0.4"
+clap = "2.33"
+structopt = "0.2"
