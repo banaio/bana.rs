@@ -1,3 +1,111 @@
+############################################################################################################################################
+# .dockerignore proper
+
+# Ignore the `.ignore/` folder #
+/**/.ignore
+/**/.ignore/
+/**/.ignore/*
+/**/.ignore/**
+/**/.ignore/**/*
+./**/.ignore
+./**/.ignore/
+./**/.ignore/*
+./**/.ignore/**
+./**/.ignore/**/*
+################################
+
+# Ignore CI and misc configuration #
+/**/.github
+/**/.github/
+/**/.github/*
+/**/.github/**
+/**/.github/**/*
+./**/.github
+./**/.github/
+./**/.github/*
+./**/.github/**
+./**/.github/**/*
+####################################
+
+# Ignore misc configuration #
+/**/.config
+/**/.config/
+/**/.config/*
+/**/.config/**
+/**/.config/**/*
+./**/.config
+./**/.config/
+./**/.config/*
+./**/.config/**
+./**/.config/**/*
+#############################
+
+# Ignore personal vscode settings #
+/**/.vscode
+/**/.vscode/
+/**/.vscode/*
+/**/.vscode/**
+/**/.vscode/**/*
+./**/.vscode
+./**/.vscode/
+./**/.vscode/*
+./**/.vscode/**
+./**/.vscode/**/*
+###################################
+
+# Ignore .editorconfig #
+/**/.editorconfig
+/**/.editorconfig/
+/**/.editorconfig/*
+/**/.editorconfig/**
+/**/.editorconfig/**/*
+./**/.editorconfig
+./**/.editorconfig/
+./**/.editorconfig/*
+./**/.editorconfig/**
+./**/.editorconfig/**/*
+########################
+
+# Ignore git #
+.git
+.gitattributes
+.gitignore
+##############
+
+# Ignore docs #
+README.md
+/**/docs
+/**/docs/
+/**/docs/*
+/**/docs/**
+/**/docs/**/*
+./**/docs
+./**/docs/
+./**/docs/*
+./**/docs/**
+./**/docs/**/*
+
+/*.md
+/**/*.md
+/**/*.md
+/**/*/*.md
+./*.md
+./**/*.md
+./**/*.md
+./**/*/*.md
+###############
+
+# Just ignore this for now #
+.env*
+.env
+.env_debug
+############################
+
+############################################################################################################################################
+
+############################################################################################################################################
+# Copy from .gitignore
+
 # To to see if a file is ignored use this command:
 # $ git check-ignore -v filename
 #
@@ -390,10 +498,4 @@ cargo-timing*.html
 #######################################################################################################################
 ############################################################################################################################################
 
-amd-radeon-rx-5700-xt/
-rtx-3090/NVIDIA-Linux-x86_64-455.23.04.run
-
-!rtx-3090/**/*.log
-!amd-radeon-rx-5700-xt/**/*.log
-!logs/
-!logs/**/*.log
+############################################################################################################################################
