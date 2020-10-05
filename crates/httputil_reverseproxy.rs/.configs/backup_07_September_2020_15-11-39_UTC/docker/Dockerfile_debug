@@ -1,0 +1,263 @@
+# Use same version of Golang as that on my machine
+# $ uname -a
+# Linux mbana-pc1-linux 5.4.0-45-generic #49-Ubuntu SMP Wed Aug 26 13:38:52 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+# $ go version
+# go version go1.13.4 linux/amd64
+FROM golang:1.13.4-alpine3.10
+
+LABEL maintainer="Mohamed Bana <m@bana.io>"
+
+# The command line syntax for bash/sh is:
+# export PAGER=less
+#
+# OR if you have most command installed:
+# export PAGER=most
+#
+# Make sure you add it to your shell config file:
+# echo 'export PAGER=less' >> $HOME/.bashrc
+ENV PAGER=less
+
+# ENV TERM=xterm
+# ENV TERM=xterm-color
+ENV TERM=xterm-256color
+ENV GOOS=linux
+ENV GOARCH=amd64
+ENV CGO_ENABLED=0
+
+# ENV OPTS_SHELL shopt -s extglob globstar nullglob extdebug
+# ENV FLAGS_SHELL -i --verbose -o nounset -o errexit -o noclobber -o pipefail ${OPTS_SHELL}
+# ENV SHELLOPTS -eufxv
+# ENV BASHOPTS
+
+ENV  BASHOPTS="extglob:globstar:nullglob:extglob:failglob:gnu_errfmt:localvar_unset:dotglob:xpg_echo"
+ENV SHELLOPTS="braceexpand:emacs:errexit:errtrace:noclobber:nounset:pipefail:posix:verbose:vi:functrace"
+
+RUN \
+  apk --no-cache update --no-cache && \
+  apk --no-cache add --no-cache \
+    bash bash-doc bash-completion grep findutils ncurses \
+    gawk sed \
+    less most \
+    man man-pages mdocml-apropos mandoc man-pages mdocml-apropos less less-doc \
+    git make  wget curl ca-certificates \
+    jq \
+  && \
+    rm -rf /var/cache/apk/*
+
+    # coreutils binutils bc \
+    # util-linux pciutils usbutils coreutils \
+    # shadow \
+    # build-base gcc abuild binutils binutils-doc gcc-doc \
+    # cmake cmake-doc extra-cmake-modules extra-cmake-modules-doc \
+    # ccache ccache-doc \
+
+# RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+# set -o emacs
+# set -o history
+# set -o ignoreeof
+# set -o interactive-comments
+# set -o pipefail
+# set -o posix
+# set -o vi
+SHELL [ \
+  "/bin/bash", \
+  "--verbose", \
+  "-o nounset -o errexit -o noclobber -o pipefail" ]
+
+/bin/bash --verbose -o nounset -o errexit -o noclobber -o pipefail
+ extglob globstar nullglob extdebug
+  # "-eufxv", \
+export SHELLOPTS="extglob:globstar:nullglob:extdebug"
+export SHELLOPTS="errexit:xtglob:globstar:nullglob:extdebug"
+export
+
+# xtrace
+
+(export BASHOPTS="extglob:globstar:nullglob:extglob:failglob:gnu_errfmt:localvar_unset:dotglob:xpg_echo"; export SHELLOPTS="braceexpand:emacs:errexit:errtrace:noclobber:nounset:pipefail:posix:verbose:vi:functrace"; /bin/bash --verbose -c "\
+    echo 'begin'; \
+    shopt; \
+    echo; echo; \
+    echo; echo; \
+    set -o; \
+    echo; echo; \
+    echo; echo; \
+    shopt | grep 'on$'; \
+    echo; echo; \
+    echo; echo; \
+    set -o | grep 'on$'; \
+    echo; echo; \
+    echo; echo; \
+    set | grep -e SHELLOPTS -e BASHOPTS; \
+    echo; echo; \
+    echo; echo; \
+    printf %s\\n \"$-\"; \
+    echo; echo; \
+    echo 'end'; \
+  "
+)
+
+onecmd:
+
+RUN \
+  shopt; echo; echo; set -o
+RUN \
+  set | grep -e SHELLOPTS -e BASHOPTS
+RUN \
+  shopt | column -t | grep -v off
+RUN \
+  set -o | column -t | grep -v off
+RUN \
+  shopt; echo; echo; set -o
+RUN \
+  shopt | grep "on$"
+RUN \
+  printf %s\\n "$-"
+
+RUN \
+  echo "OPTS_SHELL=${OPTS_SHELL}"; \
+  echo "FLAGS_SHELL=${FLAGS_SHELL}"
+
+  # "-O extglob -O globstar -O nullglob -O extdebug" \
+WORKDIR /app
+# Cache go modules to avoid re-fetching.
+COPY go.mod go.sum ./
+# Now download the modules
+RUN go mod download
+# Copy all the source files and then build them, this should result in quicker build times of the Docker image.
+COPY . .
+
+# RUN /bin/bash -c 'source $HOME/.bashrc; \
+# echo $HOME'
+# Together they are equivalent to this single line:
+
+# RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
+# To use a different shell, other than ‘/bin/sh’, use the exec form passing in the desired shell. For example:
+
+# RUN ["/bin/bash", "-c", "echo hello"]
+RUN \
+  set -vx; \
+  shopt -sp; \
+  shopt -op; \
+  ls -lah
+
+RUN \
+  make build && \
+  make run_built_binary && \
+  chmod +x $(pwd)/crawler && \
+  ln -s $(pwd)/crawler /usr/bin/crawler && \
+  chmod +x /usr/bin/crawler
+
+ENTRYPOINT [ \
+  "/bin/bash", \
+  "--verbose" \
+]
+CMD ["/usr/bin/crawler --help"]
+# CMD ["--help"]
+  # "-ilrsD" ]
+
+# RUN apk add --no-cache ca-certificates \
+#   git make bash gawk sed grep bc coreutils ncurses && \
+#   rm -rf /var/cache/apk/*
+# RUN apk add --no-cache --update \
+#   git make bash gawk sed grep bc coreutils ncurses && \
+#   rm -rf /var/cache/apk/*
+
+# # TODO: Remove `-installsuffix "static"` as it's not needed
+# RUN \
+#   go build -o ./crawler -trimpath -buildmode=exe -mod readonly -ldflags "-w -s" -installsuffix "static" ./cmd/crawler/main.go && \
+#   ln -s $(pwd)/crawler /usr/bin/crawler
+
+# set -eufxv -o nounset -o errexit -o noclobber -o pipefail -c &&
+# shopt -s extglob globstar nullglob &&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################################################################################
+#
+# P R O D U C T I O N    R E A D Y
+#
+# Docker container based on Alpine Linux. It aims at compiling GATB based
+# softwares using Alpine c/c++ compiler.
+#
+#########################################################################################
+#
+# == Docker build command:
+#
+#    docker build -f Dockerfile.alpine-compiler -t gatb_tools_alpine_compiler .
+#
+# == Docker run command:
+#
+#    see companion scripts "build.sh" to review how to use this Alpine c/c++ complier.
+#
+#########################################################################################
+
+FROM alpine:3.6
+
+# who to blame?
+MAINTAINER Patrick Durand patrick.durand@inria.fr
+
+# ###
+#
+# Base image to compile GATB softwares using an Alpine Linux OS.
+#
+# Package installation and configuration:
+#
+#     1. We need zlib, libc and libc++ to execute GATB-Tools
+#     2. we need cmake, make and c/c++ compiler to compile GATB softwares
+#     3. GATB-Tools dependencies are as follows:
+#        a. Simka     : python-2.7 and R (only for visual task,
+#                       not for compiling/testing)
+#        b. Bloocoo   : none
+#        c. DSK       : coreutil (DSK test script uses the paste command)
+#        d. MindTheGap: util-linux (MindTheGap test script requires the command
+#                       'column' which is included in bsdmainutils Debian package)
+#        e. Minia     : none
+#        f. RConnector: none
+#        g. DiscoSnp  : python-2.7 (require to run tests)
+#        h. TakeABreak: none
+#        i. all       : bash (test scripts), curl (to get tarballs from Gitub)
+#     4. to fix this issue: https://github.com/GATB/gatb-core/commit/f8a39fa3de
+#        we have to do: touch vtimes.h:
+#
+RUN apk update && \
+    apk add --no-cache \
+    bash util-linux coreutils \
+    curl \
+    make cmake gcc g++ libstdc++ libgcc \
+    zlib-dev && \
+    touch /usr/include/sys/vtimes.h
+
+RUN apk add --no-cache python2
+
+# Add the build script
+COPY build.sh /usr/bin
+
+# Fix: ensure script has exec permission
+RUN chmod +x /usr/bin/build.sh
+
+# Run this container as non-root
+#   testing machine: use pdurand account
+#   production machine: use Jenkins account
+RUN adduser -D -H -u 502 pdurand
+RUN adduser -D -H -u 1000 ci
+# Note: we do not use Docker 'USER' command here. Instead, use "--user xxx"
+# with "docker run" command.
+
+# ###
+#     Start to make a GATB-Tool. See "build.sh" header for more information.
+#
+ENTRYPOINT ["/usr/bin/build.sh"]

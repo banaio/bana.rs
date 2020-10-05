@@ -1,18 +1,36 @@
 [package]
 name = "bana-rs"
-version = "0.1.0"
-authors = ["Mohamed Bana <m@bana.io>"]
+version = "0.0.1"
+authors = [
+  "Mohamed Bana <m@bana.io>",
+]
+license-file = "./LICENSE"
+description = "Rust Programming Language mono repository for crates, projects and the website https://bana.rs website."
+homepage = "https://github.com/banaio/bana.rs"
+repository = "https://bana.rs"
+readme = "README.md"
 edition = "2018"
-
+keywords = [
+  "bloom_filter",
+  "count_min_sketch",
+  "hyperloglog",
+  "LSH",
+  "pcsa",
+]
+categories = [
+  "big_bata",
+  "data_structures",
+  "data_structures_DS",
+  "data_structures(DS)",
+  "probabilistic_DS",
+]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-
-
 [workspace]
 members = [
-    "projects/*",
+    "crates/*",
 ]
 default-members = [
-    "projects/*",
+    "crates/*",
 ]
+
+[dependencies]

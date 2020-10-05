@@ -1,0 +1,56 @@
+extends: default
+locale: en_GB.UTF-8
+
+rules:
+    line-length:
+        max: 140
+        allow-non-breakable-words: true
+        allow-non-breakable-inline-mappings: true
+        level: error
+    indentation:
+        indent-sequences: consistent
+        level: error
+        spaces: 2
+        check-multi-line-strings: true
+    document-start:
+        present: false
+    document-end:
+        present: false
+    braces:
+        min-spaces-inside: 1
+        max-spaces-inside: 1
+    brackets:
+        min-spaces-inside: 1
+        max-spaces-inside: 1
+    colons:
+        max-spaces-before: 0
+        max-spaces-after: 1
+    commas:
+        max-spaces-before: 0
+        min-spaces-after: 1
+        max-spaces-after: 1
+    comments-indentation: {}
+    empty-lines:
+        max: 1
+    empty-values:
+        forbid-in-block-mappings: true
+    #empty-values: {forbid-in-flow-mappings: true}
+    hyphens:
+        max-spaces-after: 1
+    key-duplicates: {}
+    # key-ordering: {}
+    key-ordering: disable
+    octal-values:
+        forbid-implicit-octal: true
+        forbid-explicit-octal: true
+    quoted-strings: disable
+    # quoted-strings: {}
+    #     quote-type: double
+    # quoted-strings:
+    #     required: true
+    #     extra-required: [[^http://, ^ftp://]]
+    #     quote-type: double
+    trailing-spaces: {}
+    truthy:
+        allowed-values: ["yes", "no"]
+        # check-keys: false

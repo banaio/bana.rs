@@ -1,65 +1,4 @@
 {
-  // https://code.visualstudio.com/docs/getstarted/settings#_creating-user-and-workspace-settings
-  "cSpell.allowCompoundWords": true,
-  "cSpell.checkLimit": 9007199254740991,
-  "cSpell.dictionaries": [
-    "wordsEn",
-    "wordsEnGb",
-    "companies",
-    "softwareTerms",
-    "misc",
-    "typescrip",
-    "node",
-    "php",
-    "go",
-    "python",
-    "powershell",
-    "html",
-    "css"
-  ],
-  "cSpell.enableFiletypes": [
-    "!.*.log"
-  ],
-  "cSpell.enabledLanguageIds": [
-    "asciidoc",
-    "c",
-    "cpp",
-    "csharp",
-    "css",
-    "git-commit",
-    "go",
-    "handlebars",
-    "haskell",
-    "html",
-    "jade",
-    "java",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "jsonc",
-    "latex",
-    "less",
-    "markdown",
-    "php",
-    "plaintext",
-    "python",
-    "pug",
-    "restructuredtext",
-    "rust",
-    "scala",
-    "scss",
-    "text",
-    "typescript",
-    "typescriptreact",
-    "yaml",
-    "yml"
-  ],
-  "cSpell.language": "en-GB",
-  "cSpell.logLevel": "Error",
-  "cSpell.maxDuplicateProblems": 2,
-  "cSpell.maxNumberOfProblems": 5,
-  "cSpell.minWordLength": 1,
-  "cSpell.spellCheckDelayMs": 1000,
   // Editor:BEGIN
   // Controls whether the editor shows CodeLens.
   "diffEditor.codeLens": true,
@@ -146,7 +85,7 @@
   //  - all: `cursorSurroundingLines` is enforced always.
   "editor.cursorSurroundingLinesStyle": "default",
   // Controls the width of the cursor when `editor.cursorStyle` is set to `line`.
-  "editor.cursorWidth": 2,
+  "editor.cursorWidth": 8,
   // Defines a default formatter which takes precedence over all other formatter settings. Must be the identifier of an extension contributing a formatter.
   "editor.defaultFormatter": null,
   // Controls whether the Go to Definition mouse gesture always opens the peek widget.
@@ -181,14 +120,13 @@
   //  - indentation: Use the indentation-based folding strategy.
   "editor.foldingStrategy": "auto",
   // Controls the font family.
-  "editor.fontFamily": " 'Iosevka', 'Iosevka Fixed Extended', 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
-  "editor.fontFamily/": " 'Iosevka Extended', 'Iosevka Fixed Extended', 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
+  "editor.fontFamily": " 'Iosevka Extended', 'Iosevka Fixed Extended', 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
   "editor.fontFamily/": " 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
   "editor.fontFamily//": " 'Kawkab Mono Light', 'Kawkab Mono', 'Kawkab Mono', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace ",
   // Configures font ligatures or font features.
   "editor.fontLigatures": true,
   // Controls the font size in pixels.
-  "editor.fontSize": 15,
+  "editor.fontSize": 14,
   // Controls the font weight.
   "editor.fontWeight": "normal",
   // Controls whether the editor should automatically format the pasted content. A formatter must be available and the formatter should be able to format a range in a document.
@@ -280,7 +218,7 @@
   //  - fit: The minimap will shrink as necessary to never be larger than the editor (no scrolling).
   "editor.minimap.size": "proportional",
   // A multiplier to be used on the `deltaX` and `deltaY` of mouse wheel scroll events.
-  "editor.mouseWheelScrollSensitivity": 3,
+  "editor.mouseWheelScrollSensitivity": 1,
   // Zoom the font of the editor when using mouse wheel and holding `Ctrl`.
   "editor.mouseWheelZoom": false,
   // The modifier to be used to add multiple cursors with the mouse. The Go To Definition and Open Link mouse gestures will adapt such that they do not conflict with the multicursor modifier. [Read more](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).
@@ -296,9 +234,9 @@
   // Controls whether a border should be drawn around the overview ruler.
   "editor.overviewRulerBorder": true,
   // Controls the amount of space between the bottom edge of the editor and the last line.
-  "editor.padding.bottom": 8,
+  "editor.padding.bottom": 16,
   // Controls the amount of space between the top edge of the editor and the first line.
-  "editor.padding.top": 8,
+  "editor.padding.top": 16,
   // Controls whether the parameter hints menu cycles or closes when reaching the end of the list.
   "editor.parameterHints.cycle": false,
   // Enables a pop-up that shows parameter documentation and type information as you type.
@@ -497,7 +435,7 @@
   //  - bounded: Lines will wrap at the minimum of viewport and `editor.wordWrapColumn`.
   "editor.wordWrap": "on",
   // Controls the wrapping column of the editor when `editor.wordWrap` is `wordWrapColumn` or `bounded`.
-  "editor.wordWrapColumn": 140,
+  "editor.wordWrapColumn": 120,
   // Controls the indentation of wrapped lines.
   //  - none: No indentation. Wrapped lines begin at column 1.
   //  - same: Wrapped lines get the same indentation as the parent.
@@ -509,9 +447,9 @@
   //  - advanced: Delegates wrapping points computation to the browser. This is a slow algorithm, that might cause freezes for large files, but it works correctly in all cases.
   "editor.wrappingStrategy": "simple",
   // Editor:END
-  // SCM: BEGIN
+  // SCM
   // Controls whether inline actions are always visible in the Source Control view.
-  "scm.alwaysShowActions": true,
+  "scm.alwaysShowActions": false,
   // Controls whether repositories should always be visible in the SCM view.
   "scm.alwaysShowRepositories": false,
   // Controls whether the SCM view should automatically reveal and select files when opening them.
@@ -524,7 +462,7 @@
   // Controls the default Source Control repository view mode.
   //  - tree: Show the repository changes as a tree.
   //  - list: Show the repository changes as a list.
-  "scm.defaultViewMode": "tree",
+  "scm.defaultViewMode": "list",
   // Controls diff decorations in the editor.
   //  - all: Show the diff decorations in all available locations.
   //  - gutter: Show the diff decorations only in the editor gutter.
@@ -537,248 +475,17 @@
   //  - hover: Show the diff decorator in the gutter only on hover.
   "scm.diffDecorationsGutterVisibility": "always",
   // Controls the width(px) of diff decorations in gutter (added & modified).
-  "scm.diffDecorationsGutterWidth": 5,
+  "scm.diffDecorationsGutterWidth": 3,
   // Controls the font for the input message. Use `default` for the workbench user interface font family, `editor` for the `editor.fontFamily`'s value, or a custom font family.
-  "scm.inputFontFamily": " 'Iosevka', 'monospace', monospace ",
+  "scm.inputFontFamily": "default",
   // Controls the count badges on Source Control Provider headers. These headers only appear when there is more than one provider.
   //  - hidden: Hide Source Control Provider count badges.
   //  - auto: Only show count badge for Source Control Provider when non-zero.
   //  - visible: Show Source Control Provider count badges.
-  "scm.providerCountBadge": "visible",
-  // SCM: END
-  // Keyboard:BEGIN
-  // Controls the dispatching logic for key presses to use either `code` (recommended) or `keyCode`.
-  "keyboard.dispatch": "code",
-  // Enables the macOS touchbar buttons on the keyboard if available.
-  "keyboard.touchbar.enabled": true,
-  // A set of identifiers for entries in the touchbar that should not show up (for example `workbench.action.navigateBack`.
-  "keyboard.touchbar.ignored": [],
-  // Keyboard:END
-  // Update:BEGIN
-  // Enable to download and install new VS Code Versions in the background on Windows
-  "update.enableWindowsBackgroundUpdates": true,
-  // Configure whether you receive automatic updates. Requires a restart after change. The updates are fetched from a Microsoft online service.
-  //  - none: Disable updates.
-  //  - manual: Disable automatic background update checks. Updates will be available if you manually check for updates.
-  //  - start: Check for updates only on startup. Disable automatic background update checks.
-  //  - default: Enable automatic update checks. Code will check for updates automatically and periodically.
-  "update.mode": "start",
-  // Show Release Notes after an update. The Release Notes are fetched from a Microsoft online service.
-  "update.showReleaseNotes": true,
-  // Update:END
-  // Files:BEGIN
-  // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
-  "files.associations": {
-    "**/.cargo/config": "toml",
-    "**/\\.settings.*.json": "jsonc",
-    "*.shellcheckrc": "properties",
-    "*_profile": "shellscript",
-    ".*ignore": "ignore",
-    "\\..*profile": "shellscript",
-    "\\..*rc": "shellscript",
-    "^*_profile$": "shellscript",
-    "^\\..*profile$": "shellscript",
-    "^\\..*rc$": "shellscript"
-  },
-  // When enabled, the editor will attempt to guess the character set encoding when opening files. This setting can also be configured per language.
-  "files.autoGuessEncoding": false,
-  // Controls auto save of dirty editors. Read more about autosave [here](https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save).
-  //  - off: A dirty editor is never automatically saved.
-  //  - afterDelay: A dirty editor is automatically saved after the configured `files.autoSaveDelay`.
-  //  - onFocusChange: A dirty editor is automatically saved when the editor loses focus.
-  //  - onWindowChange: A dirty editor is automatically saved when the window loses focus.
-  "files.autoSave": "onFocusChange",
-  // Controls the delay in ms after which a dirty editor is saved automatically. Only applies when `files.autoSave` is set to `afterDelay`.
-  "files.autoSaveDelay": 1000,
-  // The default language mode that is assigned to new files. If configured to `${activeEditorLanguage}`, will use the language mode of the currently active text editor if any.
-  "files.defaultLanguage": "markdown",
-  // Moves files/folders to the OS trash (recycle bin on Windows) when deleting. Disabling this will delete files/folders permanently.
-  "files.enableTrash": true,
-  // The default character set encoding to use when reading and writing files. This setting can also be configured per language.
-  "files.encoding": "utf8",
-  // The default end of line character.
-  //  - \n: LF
-  //  - \r\n: CRLF
-  //  - auto: Uses operating system specific end of line character.
-  "files.eol": "\n",
-  // Configure glob patterns for excluding files and folders. For example, the file Explorer decides which files and folders to show or hide based on this setting. Refer to the `search.exclude` setting to define search specific excludes. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/.cache": true,
-    "**/.temp": true,
-    "**/node_modules": true,
-    "**/node_modules/*": true,
-    "node_modules": true,
-    "target": true,
-    "target/": true,
-    "target/**/*": true,
-  },
-  // Controls whether unsaved files are remembered between sessions, allowing the save prompt when exiting the editor to be skipped.
-  //  - off: Disable hot exit. A prompt will show when attempting to close a window with dirty files.
-  //  - onExit: Hot exit will be triggered when the last window is closed on Windows/Linux or when the `workbench.action.quit` command is triggered (command palette, keybinding, menu). All windows without folders opened will be restored upon next launch. A list of workspaces with unsaved files can be accessed via `File > Open Recent > More...`
-  //  - onExitAndWindowClose: Hot exit will be triggered when the last window is closed on Windows/Linux or when the `workbench.action.quit` command is triggered (command palette, keybinding, menu), and also for any window with a folder opened regardless of whether it's the last window. All windows without folders opened will be restored upon next launch. A list of workspaces with unsaved files can be accessed via `File > Open Recent > More...`
-  "files.hotExit": "onExit",
-  // When enabled, insert a final new line at the end of the file when saving it.
-  "files.insertFinalNewline": true,
-  // Controls the memory available to VS Code after restart when trying to open large files. Same effect as specifying `--max-memory=NEWSIZE` on the command line.
-  //  default=4096,new=4096*4*4=16384
-  "files.maxMemoryForLargeFilesMB": 16384,
-  // Timeout in milliseconds after which file participants for create, rename, and delete are cancelled. Use `0` to disable participants.
-  "files.participants.timeout": 5000,
-  // Restore the undo stack when a file is reopened.
-  "files.restoreUndoStack": true,
-  // A save conflict can occur when a file is saved to disk that was changed by another program in the meantime. To prevent data loss, the user is asked to compare the changes in the editor with the version on disk. This setting should only be changed if you frequently encounter save conflict errors and may result in data loss if used without caution.
-  //  - askUser: Will refuse to save and ask for resolving the save conflict manually.
-  //  - overwriteFileOnDisk: Will resolve the save conflict by overwriting the file on disk with the changes in the editor.
-  "files.saveConflictResolution": "askUser",
-  // When enabled, will trim all new lines after the final new line at the end of the file when saving it.
-  "files.trimFinalNewlines": true,
-  // When enabled, will trim trailing whitespace when saving a file.
-  "files.trimTrailingWhitespace": true,
-  // Configure glob patterns of file paths to exclude from file watching. Patterns must match on absolute paths (i.e. prefix with ** or the full path to match properly). Changing this setting requires a restart. When you experience Code consuming lots of CPU time on startup, you can exclude large folders to reduce the initial load.
-  "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/*/**": true,
-    "**/.hg/store/**": true,
-    "**/.cache": true,
-    "**/.git": true,
-    "**/.temp": true,
-    "**/node_modules/*": true,
-    "target": true,
-    "target/": true,
-    "target/**/*": true,
-  },
-  // Files:END
-  "markdownlint.run": "onSave",
-  // File Explorer:BEGIN
-  // Controls whether the explorer should automatically reveal and select files when opening them.
-  //  - true: Files will be revealed and selected.
-  //  - false: Files will not be revealed and selected.
-  //  - focusNoScroll: Files will not be scrolled into view, but will still be focused.
-  "explorer.autoReveal": true,
-  // Controls whether the explorer should render folders in a compact form. In such a form, single child folders will be compressed in a combined tree element. Useful for Java package structures, for example.
-  "explorer.compactFolders": false,
-  // Controls whether the explorer should ask for confirmation when deleting a file via the trash.
-  "explorer.confirmDelete": true,
-  // Controls whether the explorer should ask for confirmation to move files and folders via drag and drop.
-  "explorer.confirmDragAndDrop": true,
-  // Controls whether file decorations should use badges.
-  "explorer.decorations.badges": true,
-  // Controls whether file decorations should use colors.
-  "explorer.decorations.colors": true,
-  // Controls whether the explorer should allow to move files and folders via drag and drop.
-  "explorer.enableDragAndDrop": true,
-  // Controls what naming strategy to use when a giving a new name to a duplicated explorer item on paste.
-  //  - simple: Appends the word "copy" at the end of the duplicated name potentially followed by a number
-  //  - smart: Adds a number at the end of the duplicated name. If some number is already part of the name, tries to increase that number
-  "explorer.incrementalNaming": "simple",
-  // Number of editors shown in the Open Editors pane.
-  "explorer.openEditors.visible": 9,
-  // Controls sorting order of files and folders in the explorer.
-  //  - default: Files and folders are sorted by their names, in alphabetical order. Folders are displayed before files.
-  //  - mixed: Files and folders are sorted by their names, in alphabetical order. Files are interwoven with folders.
-  //  - filesFirst: Files and folders are sorted by their names, in alphabetical order. Files are displayed before folders.
-  //  - type: Files and folders are sorted by their extensions, in alphabetical order. Folders are displayed before files.
-  //  - modified: Files and folders are sorted by last modified date, in descending order. Folders are displayed before files.
-  "explorer.sortOrder": "type",
-  // File Explorer:END
-  // Search:BEGIN
-  // Controls the positioning of the actionbar on rows in the search view.
-  //  - auto: Position the actionbar to the right when the search view is narrow, and immediately after the content when the search view is wide.
-  //  - right: Always position the actionbar to the right.
-  "search.actionsPosition": "auto",
-  // Controls whether the search results will be collapsed or expanded.
-  //  - auto: Files with less than 10 results are expanded. Others are collapsed.
-  //  - alwaysCollapse
-  //  - alwaysExpand
-  "search.collapseResults": "alwaysExpand",
-  // Configure glob patterns for excluding files and folders in fulltext searches and quick open. Inherits all glob patterns from the `files.exclude` setting.
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/*.code-search": true,
-    "**/.cache": true,
-    "**/.git": true,
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/.hg/store/**": true,
-    "**/.temp": true,
-    "**/node_modules/*": true,
-    "target": true,
-    "target/": true,
-    "target/**/*": true,
-  },
-  // Controls whether to follow symlinks while searching.
-  "search.followSymlinks": true,
-  // Controls whether the search view should read or modify the shared find clipboard on macOS.
-  "search.globalFindClipboard": true,
-  // Controls sorting order of editor history in quick open when filtering.
-  //  - default: History entries are sorted by relevance based on the filter value used. More relevant entries appear first.
-  //  - recency: History entries are sorted by recency. More recently opened entries appear first.
-  "search.quickOpen.history.filterSortOrder": "default",
-  // Whether to include results from recently opened files in the file results for Quick Open.
-  "search.quickOpen.includeHistory": true,
-  // Whether to include results from a global symbol search in the file results for Quick Open.
-  "search.quickOpen.includeSymbols": true,
-  // The default number of surrounding context lines to use when creating new Search Editors. If using `search.searchEditor.reusePriorSearchConfiguration`, this can be set to `null` (empty) to use the prior Search Editor's configuration.
-  "search.searchEditor.defaultNumberOfContextLines": 1,
-  // Configure effect of double clicking a result in a search editor.
-  //  - selectWord: Double clicking selects the word under the cursor.
-  //  - goToLocation: Double clicking opens the result in the active editor group.
-  //  - openLocationToSide: Double clicking opens the result in the editor group to the side, creating one if it does not yet exist.
-  "search.searchEditor.doubleClickBehaviour": "goToLocation",
-  // When enabled, new Search Editors will reuse the includes, excludes, and flags of the previously opened Search Editor.
-  "search.searchEditor.reusePriorSearchConfiguration": false,
-  // Search all files as you type.
-  "search.searchOnType": true,
-  // When `search.searchOnType` is enabled, controls the timeout in milliseconds between a character being typed and the search starting. Has no effect when `search.searchOnType` is disabled.
-  "search.searchOnTypeDebouncePeriod": 300,
-  // Update workspace search query to the editor's selected text when focusing the search view. This happens either on click or when triggering the `workbench.views.search.focus` command.
-  "search.seedOnFocus": true,
-  // Enable seeding search from the word nearest the cursor when the active editor has no selection.
-  "search.seedWithNearestWord": false,
-  // Controls whether to show line numbers for search results.
-  "search.showLineNumbers": true,
-  // Search case-insensitively if the pattern is all lowercase, otherwise, search case-sensitively.
-  "search.smartCase": true,
-  // Controls sorting order of search results.
-  //  - default: Results are sorted by folder and file names, in alphabetical order.
-  //  - fileNames: Results are sorted by file names ignoring folder order, in alphabetical order.
-  //  - type: Results are sorted by file extensions, in alphabetical order.
-  //  - modified: Results are sorted by file last modified date, in descending order.
-  //  - countDescending: Results are sorted by count per file, in descending order.
-  //  - countAscending: Results are sorted by count per file, in ascending order.
-  "search.sortOrder": "countDescending",
-  // Controls whether to use global `.gitignore` and `.ignore` files when searching for files.
-  "search.useGlobalIgnoreFiles": false,
-  // Controls whether to use `.gitignore` and `.ignore` files when searching for files.
-  "search.useIgnoreFiles": true,
-  // Controls whether to open Replace Preview when selecting or replacing a match.
-  "search.useReplacePreview": true,
-  // Search:END
-  "shellcheck.customArgs": [
-    "--check-sourced",
-    "--external-sources",
-  ],
-  "shellcheck.customArgs/": [
-    "--shell=bash",
-    "--rc=./.shellcheckrc",
-    "-source-path=./scripts",
-    "--shell=bash",
-    "-list-optional"
-  ],
-  "shellcheck.enableQuickFix": true,
-  "shellcheck.executablePath": "shellcheck",
-  "shellcheck.executablePath/": "/usr/local/bin/shellcheck",
-  "shellcheck.run": "onSave",
-  "shellcheck.useWorkspaceRootAsCwd": true,
-  "shellformat.path": "~/go/bin/shfmt",
-  // Workbench:BEGIN
+  "scm.providerCountBadge": "hidden",
+  // If set, automatically switch to the preferred color theme based on the OS appearance.
+  "window.autoDetectColorScheme": false,
+  // Workbench
   // Controls the behavior of clicking an activity bar icon in the workbench.
   //  - toggle: Hide the side bar if the clicked item is already visible.
   //  - focus: Focus side bar if the clicked item is already visible.
@@ -786,20 +493,13 @@
   // Controls the visibility of the activity bar in the workbench.
   "workbench.activityBar.visible": true,
   // Overrides colors from the currently selected color theme.
-  "workbench.colorCustomizations": {
-    "editor.lineHighlightBorder": "#ffff7230",
-    "editorBracketMatch.background": "#b71c1c",
-    "editorBracketMatch.border": "#b71c1c",
-    "editorCursor.foreground": "#ffff72",
-    "editorIndentGuide.activeBackground": "#ff7961",
-    "editorIndentGuide.background": "#ffff7245"
-  },
+  "workbench.colorCustomizations": {},
   // Specifies the color theme used in the workbench.
   "workbench.colorTheme": "Default Dark+",
   // Controls the number of recently used commands to keep in history for the command palette. Set to 0 to disable command history.
-  "workbench.commandPalette.history": 1024,
+  "workbench.commandPalette.history": 50,
   // Controls whether the last typed input to the command palette should be restored when opening it the next time.
-  "workbench.commandPalette.preserveInput": true,
+  "workbench.commandPalette.preserveInput": false,
   // Controls if the centered layout should automatically resize to maximum width when more than one group is open. Once only one group is open it will resize back to the original centered width.
   "workbench.editor.centeredLayoutAutoResize": true,
   // Controls the behavior of empty editor groups when the last tab in the group is closed. When enabled, empty groups will automatically close. When disabled, empty groups will remain part of the grid.
@@ -813,7 +513,7 @@
   // Controls whether tabs are closed in most recently used order or from left to right.
   "workbench.editor.focusRecentEditorAfterClose": true,
   // Controls whether a top border is drawn on modified (dirty) editor tabs or not.
-  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.highlightModifiedTabs": false,
   // Controls the format of the label for an editor.
   //  - default: Show the name of the file. When tabs are enabled and two files have the same name in one group the distinguishing sections of each file's path are added. When tabs are disabled, the path relative to the workspace folder is shown if the editor is active.
   //  - short: Show the name of the file followed by its directory name.
@@ -837,7 +537,7 @@
   // Controls whether an editor is revealed in any of the visible groups if opened. If disabled, an editor will prefer to open in the currently active editor group. If enabled, an already opened editor will be revealed instead of opened again in the currently active editor group. Note that there are some cases where this setting is ignored, e.g. when forcing an editor to open in a specific group or to the side of the currently active group.
   "workbench.editor.revealIfOpen": false,
   // Controls whether scrolling over tabs will open them or not. By default tabs will only reveal upon scrolling, but not open. You can press and hold the Shift-key while scrolling to change this behaviour for that duration.
-  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.editor.scrollToSwitchTabs": false,
   // Controls whether opened editors should show with an icon or not. This requires a file icon theme to be enabled as well.
   "workbench.editor.showIcons": true,
   // Controls whether opened editors should show in tabs or not.
@@ -861,28 +561,13 @@
   //  - name: The name of the untitled file is not derived from the contents of the file.
   "workbench.editor.untitled.labelFormat": "content",
   // Configure which editor to use for specific file types.
-  "workbench.editorAssociations": [
-    {
-      "viewType": "",
-      "filenamePattern": ""
-    }
-    // "**/.cargo/config": "toml",
-    // "**/\\.settings.*.json": "jsonc",
-    // "*.shellcheckrc": "properties",
-    // "*_profile": "shellscript",
-    // ".*ignore": "ignore",
-    // "\\..*profile": "shellscript",
-    // "\\..*rc": "shellscript",
-    // "^*_profile$": "shellscript",
-    // "^\\..*profile$": "shellscript",
-    // "^\\..*rc$": "shellscript"
-  ],
+  "workbench.editorAssociations": [],
   // Controls font aliasing method in the workbench.
   //  - default: Sub-pixel font smoothing. On most non-retina displays this will give the sharpest text.
   //  - antialiased: Smooth the font on the level of the pixel, as opposed to the subpixel. Can make the font appear lighter overall.
   //  - none: Disables font smoothing. Text will show with jagged sharp edges.
   //  - auto: Applies `default` or `antialiased` automatically based on the DPI of displays.
-  "workbench.fontAliasing": "auto",
+  "workbench.fontAliasing": "default",
   // Specifies the file icon theme used in the workbench or 'null' to not show any file icons.
   //  - null: No file icons
   //  - vs-minimal
@@ -906,7 +591,7 @@
   // Controls whether lists and trees have smooth scrolling.
   "workbench.list.smoothScrolling": false,
   // Controls the default location of the panel (terminal, debug console, output, problems). It can either show at the bottom, right, or left of the workbench.
-  "workbench.panel.defaultLocation": "right",
+  "workbench.panel.defaultLocation": "bottom",
   // Specifies the preferred color theme for dark OS appearance when 'window.autoDetectColorScheme' is enabled.
   "workbench.preferredDarkColorTheme": "Default Dark+",
   // Specifies the preferred color theme used in high contrast mode when 'window.autoDetectHighContrast' is enabled.
@@ -921,11 +606,11 @@
   // Controls whether the last typed input to Quick Open should be restored when opening it the next time.
   "workbench.quickOpen.preserveInput": false,
   // Controls the feedback area size in pixels of the dragging area in between views/editors. Set it to a larger value if you feel it's hard to resize views using the mouse.
-  "workbench.sash.size": 20,
+  "workbench.sash.size": 4,
   // Determines which settings editor to use by default.
   //  - ui: Use the settings UI editor.
   //  - json: Use the JSON file editor.
-  "workbench.settings.editor": "json",
+  "workbench.settings.editor": "ui",
   // Controls whether to enable the natural language search mode for settings. The natural language search is provided by a Microsoft online service.
   "workbench.settings.enableNaturalLanguageSearch": true,
   // Controls whether opening keybinding settings also opens an editor showing all default keybindings.
@@ -954,12 +639,10 @@
   // Controls tree indentation in pixels.
   "workbench.tree.indent": 8,
   // Controls whether the tree should render indent guides.
-  "workbench.tree.renderIndentGuides": "always",
+  "workbench.tree.renderIndentGuides": "onHover",
   // Controls the visibility of view header actions. View header actions may either be always visible, or only visible when that view is focused or hovered over.
-  "workbench.view.alwaysShowHeaderActions": true,
-  "workbench.enableExperiments": false,
-  // Workbench:END
-  // Window:BEGIN
+  "workbench.view.alwaysShowHeaderActions": false,
+  // Window
   // If enabled, will automatically change to high contrast theme if Windows is using a high contrast theme, and to dark theme when switching away from a Windows high contrast theme.
   "window.autoDetectHighContrast": true,
   // If enabled, clicking on an inactive window will both activate the window and trigger the element under the mouse if it is clickable. If disabled, clicking anywhere on an inactive window will activate it only and a second click is required on the element.
@@ -982,7 +665,7 @@
   //  - toggle: Menu is hidden but can be displayed via Alt key.
   //  - hidden: Menu is always hidden.
   //  - compact: Menu is displayed as a compact button in the sidebar. This value is ignored when 'window.titleBarStyle' is 'native'.
-  "window.menuBarVisibility": "visible",
+  "window.menuBarVisibility": "default",
   // Controls the dimensions of opening a new window when at least one window is already opened. Note that this setting does not have an impact on the first window that is opened. The first window will always restore the size and location as you left it before closing.
   //  - default: Open new windows in the center of the screen.
   //  - inherit: Open new windows with same dimension as last active one.
@@ -1037,9 +720,184 @@
   "window.titleSeparator": " — ",
   // Adjust the zoom level of the window. The original size is 0 and each increment above (e.g. 1) or below (e.g. -1) represents zooming 20% larger or smaller. You can also enter decimals to adjust the zoom level with a finer granularity.
   "window.zoomLevel": 0,
-  // If set, automatically switch to the preferred color theme based on the OS appearance.
-  "window.autoDetectColorScheme": false,
-  // Window:END
+  // Files
+  // Configure file associations to languages (e.g. `"*.extension": "html"`). These have precedence over the default associations of the languages installed.
+  "files.associations": {},
+  // When enabled, the editor will attempt to guess the character set encoding when opening files. This setting can also be configured per language.
+  "files.autoGuessEncoding": false,
+  // Controls auto save of dirty editors. Read more about autosave [here](https://code.visualstudio.com/docs/editor/codebasics#_save-auto-save).
+  //  - off: A dirty editor is never automatically saved.
+  //  - afterDelay: A dirty editor is automatically saved after the configured `files.autoSaveDelay`.
+  //  - onFocusChange: A dirty editor is automatically saved when the editor loses focus.
+  //  - onWindowChange: A dirty editor is automatically saved when the window loses focus.
+  "files.autoSave": "off",
+  // Controls the delay in ms after which a dirty editor is saved automatically. Only applies when `files.autoSave` is set to `afterDelay`.
+  "files.autoSaveDelay": 1000,
+  // The default language mode that is assigned to new files. If configured to `${activeEditorLanguage}`, will use the language mode of the currently active text editor if any.
+  "files.defaultLanguage": "",
+  // Moves files/folders to the OS trash (recycle bin on Windows) when deleting. Disabling this will delete files/folders permanently.
+  "files.enableTrash": true,
+  // The default character set encoding to use when reading and writing files. This setting can also be configured per language.
+  "files.encoding": "utf8",
+  // The default end of line character.
+  //  - \n: LF
+  //  - \r\n: CRLF
+  //  - auto: Uses operating system specific end of line character.
+  "files.eol": "auto",
+  // Configure glob patterns for excluding files and folders. For example, the file Explorer decides which files and folders to show or hide based on this setting. Refer to the `search.exclude` setting to define search specific excludes. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  // Controls whether unsaved files are remembered between sessions, allowing the save prompt when exiting the editor to be skipped.
+  //  - off: Disable hot exit. A prompt will show when attempting to close a window with dirty files.
+  //  - onExit: Hot exit will be triggered when the last window is closed on Windows/Linux or when the `workbench.action.quit` command is triggered (command palette, keybinding, menu). All windows without folders opened will be restored upon next launch. A list of workspaces with unsaved files can be accessed via `File > Open Recent > More...`
+  //  - onExitAndWindowClose: Hot exit will be triggered when the last window is closed on Windows/Linux or when the `workbench.action.quit` command is triggered (command palette, keybinding, menu), and also for any window with a folder opened regardless of whether it's the last window. All windows without folders opened will be restored upon next launch. A list of workspaces with unsaved files can be accessed via `File > Open Recent > More...`
+  "files.hotExit": "onExit",
+  // When enabled, insert a final new line at the end of the file when saving it.
+  "files.insertFinalNewline": false,
+  // Controls the memory available to VS Code after restart when trying to open large files. Same effect as specifying `--max-memory=NEWSIZE` on the command line.
+  "files.maxMemoryForLargeFilesMB": 4096,
+  // Timeout in milliseconds after which file participants for create, rename, and delete are cancelled. Use `0` to disable participants.
+  "files.participants.timeout": 5000,
+  // Restore the undo stack when a file is reopened.
+  "files.restoreUndoStack": true,
+  // A save conflict can occur when a file is saved to disk that was changed by another program in the meantime. To prevent data loss, the user is asked to compare the changes in the editor with the version on disk. This setting should only be changed if you frequently encounter save conflict errors and may result in data loss if used without caution.
+  //  - askUser: Will refuse to save and ask for resolving the save conflict manually.
+  //  - overwriteFileOnDisk: Will resolve the save conflict by overwriting the file on disk with the changes in the editor.
+  "files.saveConflictResolution": "askUser",
+  // When enabled, will trim all new lines after the final new line at the end of the file when saving it.
+  "files.trimFinalNewlines": false,
+  // When enabled, will trim trailing whitespace when saving a file.
+  "files.trimTrailingWhitespace": false,
+  // Configure glob patterns of file paths to exclude from file watching. Patterns must match on absolute paths (i.e. prefix with ** or the full path to match properly). Changing this setting requires a restart. When you experience Code consuming lots of CPU time on startup, you can exclude large folders to reduce the initial load.
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.hg/store/**": true
+  },
+  // Screencast Mode
+  // Controls the font size (in pixels) of the screencast mode keyboard.
+  "screencastMode.fontSize": 56,
+  // Only show keyboard shortcuts in Screencast Mode.
+  "screencastMode.onlyKeyboardShortcuts": false,
+  // Controls the vertical offset of the screencast mode overlay from the bottom as a percentage of the workbench height.
+  "screencastMode.verticalOffset": 20,
+  // Zen Mode
+  // Controls whether turning on Zen Mode also centers the layout.
+  "zenMode.centerLayout": true,
+  // Controls whether turning on Zen Mode also puts the workbench into full screen mode.
+  "zenMode.fullScreen": true,
+  // Controls whether turning on Zen Mode also hides the activity bar at the left of the workbench.
+  "zenMode.hideActivityBar": true,
+  // Controls whether turning on Zen Mode also hides the editor line numbers.
+  "zenMode.hideLineNumbers": true,
+  // Controls whether turning on Zen Mode also hides the status bar at the bottom of the workbench.
+  "zenMode.hideStatusBar": true,
+  // Controls whether turning on Zen Mode also hides workbench tabs.
+  "zenMode.hideTabs": true,
+  // Controls whether a window should restore to zen mode if it was exited in zen mode.
+  "zenMode.restore": false,
+  // Controls whether notifications are shown while in zen mode. If true, only error notifications will pop out.
+  "zenMode.silentNotifications": true,
+  // File Explorer
+  // Controls whether the explorer should automatically reveal and select files when opening them.
+  //  - true: Files will be revealed and selected.
+  //  - false: Files will not be revealed and selected.
+  //  - focusNoScroll: Files will not be scrolled into view, but will still be focused.
+  "explorer.autoReveal": true,
+  // Controls whether the explorer should render folders in a compact form. In such a form, single child folders will be compressed in a combined tree element. Useful for Java package structures, for example.
+  "explorer.compactFolders": true,
+  // Controls whether the explorer should ask for confirmation when deleting a file via the trash.
+  "explorer.confirmDelete": true,
+  // Controls whether the explorer should ask for confirmation to move files and folders via drag and drop.
+  "explorer.confirmDragAndDrop": true,
+  // Controls whether file decorations should use badges.
+  "explorer.decorations.badges": true,
+  // Controls whether file decorations should use colors.
+  "explorer.decorations.colors": true,
+  // Controls whether the explorer should allow to move files and folders via drag and drop.
+  "explorer.enableDragAndDrop": true,
+  // Controls what naming strategy to use when a giving a new name to a duplicated explorer item on paste.
+  //  - simple: Appends the word "copy" at the end of the duplicated name potentially followed by a number
+  //  - smart: Adds a number at the end of the duplicated name. If some number is already part of the name, tries to increase that number
+  "explorer.incrementalNaming": "simple",
+  // Number of editors shown in the Open Editors pane.
+  "explorer.openEditors.visible": 9,
+  // Controls sorting order of files and folders in the explorer.
+  //  - default: Files and folders are sorted by their names, in alphabetical order. Folders are displayed before files.
+  //  - mixed: Files and folders are sorted by their names, in alphabetical order. Files are interwoven with folders.
+  //  - filesFirst: Files and folders are sorted by their names, in alphabetical order. Files are displayed before folders.
+  //  - type: Files and folders are sorted by their extensions, in alphabetical order. Folders are displayed before files.
+  //  - modified: Files and folders are sorted by last modified date, in descending order. Folders are displayed before files.
+  "explorer.sortOrder": "default",
+  // Search
+  // Controls the positioning of the actionbar on rows in the search view.
+  //  - auto: Position the actionbar to the right when the search view is narrow, and immediately after the content when the search view is wide.
+  //  - right: Always position the actionbar to the right.
+  "search.actionsPosition": "auto",
+  // Controls whether the search results will be collapsed or expanded.
+  //  - auto: Files with less than 10 results are expanded. Others are collapsed.
+  //  - alwaysCollapse
+  //  - alwaysExpand
+  "search.collapseResults": "alwaysExpand",
+  // Configure glob patterns for excluding files and folders in fulltext searches and quick open. Inherits all glob patterns from the `files.exclude` setting.
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+  // Controls whether to follow symlinks while searching.
+  "search.followSymlinks": true,
+  // Controls whether the search view should read or modify the shared find clipboard on macOS.
+  "search.globalFindClipboard": false,
+  // Controls sorting order of editor history in quick open when filtering.
+  //  - default: History entries are sorted by relevance based on the filter value used. More relevant entries appear first.
+  //  - recency: History entries are sorted by recency. More recently opened entries appear first.
+  "search.quickOpen.history.filterSortOrder": "default",
+  // Whether to include results from recently opened files in the file results for Quick Open.
+  "search.quickOpen.includeHistory": true,
+  // Whether to include results from a global symbol search in the file results for Quick Open.
+  "search.quickOpen.includeSymbols": false,
+  // The default number of surrounding context lines to use when creating new Search Editors. If using `search.searchEditor.reusePriorSearchConfiguration`, this can be set to `null` (empty) to use the prior Search Editor's configuration.
+  "search.searchEditor.defaultNumberOfContextLines": 1,
+  // Configure effect of double clicking a result in a search editor.
+  //  - selectWord: Double clicking selects the word under the cursor.
+  //  - goToLocation: Double clicking opens the result in the active editor group.
+  //  - openLocationToSide: Double clicking opens the result in the editor group to the side, creating one if it does not yet exist.
+  "search.searchEditor.doubleClickBehaviour": "goToLocation",
+  // When enabled, new Search Editors will reuse the includes, excludes, and flags of the previously opened Search Editor.
+  "search.searchEditor.reusePriorSearchConfiguration": false,
+  // Search all files as you type.
+  "search.searchOnType": true,
+  // When `search.searchOnType` is enabled, controls the timeout in milliseconds between a character being typed and the search starting. Has no effect when `search.searchOnType` is disabled.
+  "search.searchOnTypeDebouncePeriod": 300,
+  // Update workspace search query to the editor's selected text when focusing the search view. This happens either on click or when triggering the `workbench.views.search.focus` command.
+  "search.seedOnFocus": false,
+  // Enable seeding search from the word nearest the cursor when the active editor has no selection.
+  "search.seedWithNearestWord": false,
+  // Controls whether to show line numbers for search results.
+  "search.showLineNumbers": false,
+  // Search case-insensitively if the pattern is all lowercase, otherwise, search case-sensitively.
+  "search.smartCase": false,
+  // Controls sorting order of search results.
+  //  - default: Results are sorted by folder and file names, in alphabetical order.
+  //  - fileNames: Results are sorted by file names ignoring folder order, in alphabetical order.
+  //  - type: Results are sorted by file extensions, in alphabetical order.
+  //  - modified: Results are sorted by file last modified date, in descending order.
+  //  - countDescending: Results are sorted by count per file, in descending order.
+  //  - countAscending: Results are sorted by count per file, in ascending order.
+  "search.sortOrder": "default",
+  // Controls whether to use global `.gitignore` and `.ignore` files when searching for files.
+  "search.useGlobalIgnoreFiles": false,
+  // Controls whether to use `.gitignore` and `.ignore` files when searching for files.
+  "search.useIgnoreFiles": true,
+  // Controls whether to open Replace Preview when selecting or replacing a match.
+  "search.useReplacePreview": true,
   // HTTP:BEGIN
   // The proxy setting to use. If not set, will be inherited from the `http_proxy` and `https_proxy` environment variables.
   "http.proxy": "",
@@ -1055,6 +913,26 @@
   // Controls whether CA certificates should be loaded from the OS. (On Windows and macOS a reload of the window is required after turning this off.)
   "http.systemCertificates": true,
   // HTTP:END
+  // Keyboard:BEGIN
+  // Controls the dispatching logic for key presses to use either `code` (recommended) or `keyCode`.
+  "keyboard.dispatch": "code",
+  // Enables the macOS touchbar buttons on the keyboard if available.
+  "keyboard.touchbar.enabled": true,
+  // A set of identifiers for entries in the touchbar that should not show up (for example `workbench.action.navigateBack`.
+  "keyboard.touchbar.ignored": [],
+  // Keyboard:END
+  // Update:BEGIN
+  // Enable to download and install new VS Code Versions in the background on Windows
+  "update.enableWindowsBackgroundUpdates": true,
+  // Configure whether you receive automatic updates. Requires a restart after change. The updates are fetched from a Microsoft online service.
+  //  - none: Disable updates.
+  //  - manual: Disable automatic background update checks. Updates will be available if you manually check for updates.
+  //  - start: Check for updates only on startup. Disable automatic background update checks.
+  //  - default: Enable automatic update checks. Code will check for updates automatically and periodically.
+  "update.mode": "default",
+  // Show Release Notes after an update. The Release Notes are fetched from a Microsoft online service.
+  "update.showReleaseNotes": true,
+  // Update:END
   // Debug:BEGIN
   // Allow setting breakpoints in any file.
   "debug.allowBreakpointsEverywhere": false,
@@ -1582,7 +1460,7 @@
   "terminal.explorerKind": "external",
   // External Terminal
   // Customizes which terminal to run on Linux.
-  "terminal.external.linuxExec/": "xterm",
+  "terminal.external.linuxExec": "xterm",
   // Customizes which terminal application to run on macOS.
   "terminal.external.osxExec": "Terminal.app",
   // Customizes which terminal to run on Windows.
@@ -1637,7 +1515,7 @@
   // Scrolling speed multiplier when pressing `Alt`.
   "terminal.integrated.fastScrollSensitivity": 5,
   // Controls the font family of the terminal, this defaults to `editor.fontFamily`'s value.
-  "terminal.integrated.fontFamily": " 'Iosevka', 'Source Code Pro for Powerline', 'Iosevka Fixed', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace",
+  "terminal.integrated.fontFamily": " 'Source Code Pro for Powerline', 'Iosevka Fixed', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace",
   // Controls the font size in pixels of the terminal.
   "terminal.integrated.fontSize": 13,
   // The font weight to use within the terminal for non-bold text.
@@ -1914,15 +1792,6 @@
   "[html]": {
     "editor.suggest.insertMode": "replace"
   },
-  // Configure settings to be overridden for [Log] language.
-  "[Log]": {
-    "editor.fontFamily": " 'Iosevka Term Extended', 'Iosevka Extended', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace ",
-    "editor.fontSize": 12
-  },
-  // Configure settings to be overridden for [javascript] language.
-  "[javascript]": {
-    "editor.defaultFormatter/": "dbaeumer.vscode-eslint"
-  },
   // Configure settings to be overridden for [json] language.
   "[json]": {
     "editor.defaultFormatter/": "dbaeumer.vscode-eslint",
@@ -2026,11 +1895,11 @@
   // The option `"always"` applies to all parts of the file regardless of markup/css.
   "emmet.showExpandedAbbreviation": "always",
   // If `true`, then Emmet suggestions will show up as snippets allowing you to order them as per `editor.snippetSuggestions` setting.
-  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.showSuggestionsAsSnippets": false,
   // Define profile for specified syntax or use your own profile with specific rules.
   "emmet.syntaxProfiles": {},
   // When enabled, Emmet abbreviations are expanded when pressing TAB.
-  "emmet.triggerExpansionOnTab": true,
+  "emmet.triggerExpansionOnTab": false,
   // Variables to be used in Emmet snippets
   "emmet.variables": {},
   // Emmet:END
@@ -2107,7 +1976,7 @@
   // Ignores the warning when Git 2.25 - 2.26 is installed on Windows.
   "git.ignoreWindowsGit27Warning": false,
   // Controls when to show commit message input validation.
-  "git.inputValidation": "warn",
+  "git.inputValidation": "error",
   // Controls the commit message length threshold for showing a warning.
   "git.inputValidationLength": 72,
   // Controls the commit message subject length threshold for showing a warning. Unset it to inherit the value of `config.inputValidationLength`.
@@ -2230,44 +2099,6 @@
   // Run npm commands with the `--silent` option.
   "npm.runSilent": false,
   // The default click action used in the npm scripts explorer: `open` or `run`, the default is `open`.
-  "npm.scriptExplorerAction": "open",
+  "npm.scriptExplorerAction": "open"
   // Npm:END
-  "yaml.completion": true,
-  "yaml.format.bracketSpacing": true,
-  "yaml.format.enable": true,
-  "yaml.format.printWidth": 100,
-  "yaml.format.proseWrap": "never",
-  "yaml.format.singleQuote": true,
-  "yaml.hover": true,
-  "yaml.schemaStore.enable": true,
-  "yaml.schemas": {
-    "https://json.schemastore.org/github-workflow": [
-      ".github/workflows/*.yml",
-      ".github/workflows/*.yaml",
-      "**/\\.github/workflows/*\\.yml",
-      "**/\\.github/workflows/*\\.yaml",
-      "**/.github/workflows/*.yml",
-      "**/.github/workflows/*.yaml",
-    ],
-    // "http://json.schemastore.org/github-workflow": [
-    //   ".github/workflows/*.yml",
-    //   ".github/workflows/*.yaml",
-    //   "**/\\.github/workflows/*\\.yml",
-    //   "**/\\.github/workflows/*\\.yaml",
-    //   "**/.github/workflows/*.yml",
-    //   "**/.github/workflows/*.yaml",
-    // ],
-    // "http://json.schemastore.org/github-action": [
-    //   "\\.github/workflows/*.yml",
-    //   "\\.github/workflows/*.yaml",
-    //   "**/\\.github/workflows/*.yml",
-    //   "**/\\.github/workflows/*.yaml",
-    // ],
-    // ".github/workflow_schemas/github-workflow.json": [
-    //   "//.github/workflows/*.yml//",
-    //   "//.github/workflows/*.yaml//",
-    // ]
-  },
-  "yaml.trace.server": "verbose",
-  "yaml.validate": true
 }

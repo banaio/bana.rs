@@ -1,0 +1,33 @@
+# Ignore personal dev folders.
+.ignore
+.ignore/
+.ignore/**
+.ignore/**/*
+##############################
+
+# Ignore personal vscode settings folder and git
+.vscode
+.editorconfig
+
+.git
+.gitattributes
+.gitignore
+
+.shellcheckrc
+.golangci.yml
+
+README.md
+docs
+################################################
+
+# Ignore binaries from running build
+./target
+target
+####################################
+
+# Misc #
+# Just ignore this for now
+.env*
+.env
+.env_debug
+########

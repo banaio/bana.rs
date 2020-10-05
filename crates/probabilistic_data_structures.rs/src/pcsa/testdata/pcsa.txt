@@ -1,0 +1,25 @@
+PCSA.add:
+  element="modification observations justification meekness\'s Zeus palatial dispensary\'s firemen blowsiest aromatic"
+  result=4036574631736544713
+  result="0011100000000100110010110011110110101010000000101000110111001001"
+PCSA.add:
+  element="fluorocarbon\'s incongruities liquidates garret occupations Latin fungal homily jaundice\'s dictator\'s"
+  result=104840265646043843
+  result="0000000101110100011101111010101010000111111111010111001011000011"
+PCSA.add:
+  element="unidentified Douglass thunderstorm\'s switchblades skewer\'s pretense vectored making Brittany decriminalize"
+  result=3602192007606067940
+  result="0011000111111101100011101000101110110010000111000110001011100100"
+PCSA.add:
+  element="Medicare\'s prouder cogwheels Adolfo\'s Fillmore Fraser\'s acquisitive sacristans drill\'s deluding"
+  result=15102677877746864651
+  result="1101000110010111011111011000001100101100010000001001001000001011"
+PCSA.add:
+  element="jellyfishes earmuffs thermodynamic chisels Geoffrey twister\'s chilli\'s acclimatize occasions pliable"
+  result=1672382516785588519
+  result="0001011100110101011111110000100111010001100101000010100100100111"
+[2020-08-20T14:33:36Z INFO  main] main: pcsa=[
+  bitmaps_size=32
+  bitmaps=""
+  bitmaps_test_1=""
+]

@@ -181,10 +181,11 @@
   //  - indentation: Use the indentation-based folding strategy.
   "editor.foldingStrategy": "auto",
   // Controls the font family.
-  "editor.fontFamily": " 'Iosevka', 'Iosevka Fixed Extended', 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
-  "editor.fontFamily/": " 'Iosevka Extended', 'Iosevka Fixed Extended', 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
-  "editor.fontFamily/": " 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
-  "editor.fontFamily//": " 'Kawkab Mono Light', 'Kawkab Mono', 'Kawkab Mono', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace ",
+  "editor.fontFamily": " 'Iosevka', 'Iosevka Extended', 'Iosevka-Extended', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace ",
+  "editor.fontFamily////": " 'Iosevka Fixed Extended', 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
+  "editor.fontFamily///": " 'Iosevka Extended', 'Iosevka Fixed Extended', 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
+  "editor.fontFamily//": " 'Iosevka', 'Iosevka-Extended', 'monospace', monospace ",
+  "editor.fontFamily/": " 'Kawkab Mono Light', 'Kawkab Mono', 'Kawkab Mono', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace ",
   // Configures font ligatures or font features.
   "editor.fontLigatures": true,
   // Controls the font size in pixels.
@@ -280,7 +281,7 @@
   //  - fit: The minimap will shrink as necessary to never be larger than the editor (no scrolling).
   "editor.minimap.size": "proportional",
   // A multiplier to be used on the `deltaX` and `deltaY` of mouse wheel scroll events.
-  "editor.mouseWheelScrollSensitivity": 3,
+  "editor.mouseWheelScrollSensitivity": 1,
   // Zoom the font of the editor when using mouse wheel and holding `Ctrl`.
   "editor.mouseWheelZoom": false,
   // The modifier to be used to add multiple cursors with the mouse. The Go To Definition and Open Link mouse gestures will adapt such that they do not conflict with the multicursor modifier. [Read more](https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier).
@@ -296,9 +297,9 @@
   // Controls whether a border should be drawn around the overview ruler.
   "editor.overviewRulerBorder": true,
   // Controls the amount of space between the bottom edge of the editor and the last line.
-  "editor.padding.bottom": 8,
+  "editor.padding.bottom": 4,
   // Controls the amount of space between the top edge of the editor and the first line.
-  "editor.padding.top": 8,
+  "editor.padding.top": 4,
   // Controls whether the parameter hints menu cycles or closes when reaching the end of the list.
   "editor.parameterHints.cycle": false,
   // Enables a pop-up that shows parameter documentation and type information as you type.
@@ -503,7 +504,8 @@
   //  - same: Wrapped lines get the same indentation as the parent.
   //  - indent: Wrapped lines get +1 indentation toward the parent.
   //  - deepIndent: Wrapped lines get +2 indentation toward the parent.
-  "editor.wrappingIndent": "deepIndent",
+  "editor.wrappingIndent": "none",
+  "editor.wrappingIndent/": "deepIndent",
   // Controls the algorithm that computes wrapping points.
   //  - simple: Assumes that all characters are of the same width. This is a fast algorithm that works correctly for monospace fonts and certain scripts (like Latin characters) where glyphs are of equal width.
   //  - advanced: Delegates wrapping points computation to the browser. This is a slow algorithm, that might cause freezes for large files, but it works correctly in all cases.
@@ -777,7 +779,7 @@
   "shellcheck.executablePath/": "/usr/local/bin/shellcheck",
   "shellcheck.run": "onSave",
   "shellcheck.useWorkspaceRootAsCwd": true,
-  "shellformat.path": "~/go/bin/shfmt",
+  "shellformat.path": "/usr/local/bin/shfmt",
   // Workbench:BEGIN
   // Controls the behavior of clicking an activity bar icon in the workbench.
   //  - toggle: Hide the side bar if the clicked item is already visible.
@@ -1609,7 +1611,7 @@
   // Controls the style of terminal cursor.
   "terminal.integrated.cursorStyle": "line",
   // Controls the width of the cursor when `terminal.integrated.cursorStyle` is set to `line`.
-  "terminal.integrated.cursorWidth": 1,
+  "terminal.integrated.cursorWidth": 2,
   // An explicit start path where the terminal will be launched, this is used as the current working directory (cwd) for the shell process. This may be particularly useful in workspace settings if the root directory is not a convenient cwd.
   "terminal.integrated.cwd": "",
   // Controls whether to detect and set the `$LANG` environment variable to a UTF-8 compliant option since VS Code's terminal only supports UTF-8 encoded data coming from the shell.
@@ -1637,7 +1639,8 @@
   // Scrolling speed multiplier when pressing `Alt`.
   "terminal.integrated.fastScrollSensitivity": 5,
   // Controls the font family of the terminal, this defaults to `editor.fontFamily`'s value.
-  "terminal.integrated.fontFamily": " 'Iosevka', 'Source Code Pro for Powerline', 'Iosevka Fixed', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace",
+  "terminal.integrated.fontFamily": " 'Iosevka', 'Source Code Pro for Powerline', 'Iosevka Extended', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace ",
+  "terminal.integrated.fontFamily/": " 'Source Code Pro for Powerline', 'Iosevka Fixed', 'Iosevka Fixed Extended', 'Iosevka-Extended', 'monospace', monospace",
   // Controls the font size in pixels of the terminal.
   "terminal.integrated.fontSize": 13,
   // The font weight to use within the terminal for non-bold text.
@@ -2154,7 +2157,7 @@
   //  - mixed: All changes, tracked and untracked, appear together and behave equally.
   //  - separate: Untracked changes appear separately in the Source Control view. They are also excluded from several actions.
   //  - hidden: Untracked changes are hidden and excluded from several actions.
-  "git.untrackedChanges": "separate",
+  "git.untrackedChanges": "mixed",
   // Controls whether force pushing uses the safer force-with-lease variant.
   "git.useForcePushWithLease": true,
   // Controls whether to enable automatic GitHub authentication for git commands within VS Code.

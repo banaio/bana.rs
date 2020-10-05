@@ -1,0 +1,49 @@
+# Use same version of Golang as that on my machine
+# $ uname -a
+# Linux mbana-pc1-linux 5.4.0-45-generic #49-Ubuntu SMP Wed Aug 26 13:38:52 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+# $ go version
+# go version go1.13.4 linux/amd64
+FROM golang:1.13.4-alpine3.10
+
+LABEL maintainer="Mohamed Bana <m@bana.io>"
+
+ENV TERM=xterm-256color
+ENV GOOS=linux
+ENV GOARCH=amd64
+ENV CGO_ENABLED=0
+
+RUN \
+  apk --no-cache update --no-cache && \
+  apk --no-cache add --no-cache ca-certificates bash make git ncurses
+
+# SHELL ["/bin/bash", "--verbose", "--pretty-print", "-eufxv", "-o", "nounset", "-o", "errexit", "-o", "noclobber", "-o", "pipefail", "-c"]
+SHELL ["/bin/bash", "--verbose", "-euf", "-o", "nounset", "-o", "errexit", "-o", "noclobber", "-o", "pipefail", "-c"]
+
+WORKDIR /app
+
+# COPY go.mod go.sum ./
+# Copies go.mod go.sum to /app
+COPY go.??? ./
+RUN go mod download
+COPY . .
+
+RUN \
+  ls -lah /app && \
+  ls -lah . && \
+  go build -o $(pwd)/crawler -ldflags='-w -s' -installsuffix 'static' ./cmd/crawler/main.go && \
+  ln -s $(pwd)/crawler /usr/bin/crawler
+
+# ENTRYPOINT ["echo $(date --utc) && /usr/bin/crawler"]
+# CMD ["/bin/bash", "--verbose", "--pretty-print", "-eufxv", "-o", "nounset", "-o", "errexit", "-o", "noclobber", "-o", "pipefail", "-c"]
+
+# ENTRYPOINT ["/bin/bash", "--verbose", "--pretty-print", "-eufxv", "-o", "nounset", "-o", "errexit", "-o", "noclobber", "-o", "pipefail", "-c"]
+ENTRYPOINT ["/bin/bash", "-euf", "-o", "nounset", "-o", "errexit", "-o", "noclobber", "-o", "pipefail", "-c"]
+CMD [" \n\
+RESET=`tput sgr0` \n\
+RED=`tput bold; tput setaf 1` \n\
+GREEN=`tput bold; tput setaf 2` \n\
+printf -- '%s' ${GREEN} '---- started: ' 'time=' $(date --utc -Iseconds) ${RESET} $'\n' \n\
+exit_code_crawler=0 \n\
+/usr/bin/crawler || (exit_code_crawler=$? && printf -- '%s' ${RED} 'ERROR: ' 'exit_code_crawler=' ${exit_code_crawler} ${RESET} $'\n') \n\
+printf -- '%s' ${GREEN} '---- ended: ' 'time=' $(date --utc -Iseconds) ', ' 'exit_code_crawler=' ${exit_code_crawler} ${RESET} $'\n' \n\
+"]

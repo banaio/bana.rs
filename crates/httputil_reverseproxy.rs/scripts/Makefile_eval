@@ -1,0 +1,208 @@
+# https://gist.github.com/rsperl/d2dfe88a520968fbc1f49db0a29345b9
+# http://www.lunderberg.com/2015/08/25/cpp-makefile-pretty-output/
+# http://agdr.org/2020/05/14/Polyglot-Makefiles.html
+# https://tech.davis-hansson.com/p/make/
+
+# FLAGS_SHELL												:= -eufxv
+# FLAGS_SHELL												:= -eufa
+FLAGS_SHELL												:= -euf
+# .ONESHELL:
+SHELL															:= bash
+.SHELLFLAGS 											:= ${FLAGS_SHELL} \
+	-o nounset \
+	-o errexit \
+	-o noclobber \
+	-o pipefail \
+	-c
+# IFS														:= $'\n\t'
+
+# .DEFAULT_GOAL										:= all
+.DELETE_ON_ERROR:
+MAKEFLAGS 												+= --warn-undefined-variables --environment-overrides #--print-directory #--no-builtin-rules #--no-builtin-variables
+# MAKEFLAGS 											+= --jobs=32 --output-sync=target # https://www.gnu.org/software/make/manual/html_node/Parallel-Output.html#Parallel-Output
+# MAKEFLAGS 											+= --just-print --dry-run --recon # debug
+
+RESET															:= $(shell tput sgr0)
+BOLD   														:= $(shell tput bold)
+RED																:= $(shell tput bold; tput setaf 1)
+GREEN															:= $(shell tput bold; tput setaf 2)
+YELLOW														:= $(shell tput bold; tput setaf 3)
+
+export GIT_REV										:= $(shell (git rev-parse --short HEAD || echo "Not git repository"); exit 0)
+# export GIT_REV										:= $(shell git rev-parse --short HEAD || echo "Not git repository"; exit
+export DIR_NAME										:= $(shell basename $(shell pwd))
+export PATH_FULL									:= $(shell pwd)
+export PATH												:= $(shell echo ${GOPATH}/bin:${PATH})
+# github.com/banaio/backend_engineer_at_monzo_take_home_test
+export DIR_NAME										:= $(shell basename $(shell pwd))
+export MODULE_NAME								:= $(shell echo "github.com/banaio/${DIR_NAME}")
+export GOMAXPROCS 								?= 32
+export PARALLEL 									?= ${GOMAXPROCS}
+export GOLANGCI_LINT_VERSION 			:= v1.30.0
+export GOLANGCI_LINT_BINARY				:= $(shell command -v golangci-lint 2> /dev/null)
+
+define print_separator
+@printf "%b" "${GREEN}" "$@:" `` "  " `` `printf -- '-%.0s' $(shell seq 1 $$(expr $$(tput cols) - `expr length "$@"` - 3))` "${RESET}" $$'\n'
+endef
+
+# This allows us to accept extra arguments (by doing nothing when we get a job that doesn't match, rather than throwing an error).
+%:
+	@:
+
+.PHONY: clean lint test build
+all: clean lint test build
+
+.PHONY: clean
+clean:
+	$(print_separator)
+	$(info clean not implemented - ignoring ...)
+
+.ONESHELL: debug
+.PHONY: debug
+debug:
+	$(print_separator)
+	@var_names=$$(printf -- '%s\n' "${GREEN}"{"GIT_REV","DIR_NAME","PATH_FULL","PATH","DIR_NAME","MODULE_NAME","GOMAXPROCS","PARALLEL","GOLANGCI_LINT_VERSION","GOLANGCI_LINT_BINARY"}"${RESET}")
+	@print_vars=$$(printf -- '"$${%s}"\n' {"GIT_REV","DIR_NAME","PATH_FULL","PATH","DIR_NAME","MODULE_NAME","GOMAXPROCS","PARALLEL","GOLANGCI_LINT_VERSION","GOLANGCI_LINT_BINARY"})
+	# @echo "var_names=$${var_names}"
+	# @echo "print_vars=$${print_vars}"
+	@vals=$$(eval "printf -- '%b\n' "$${print_vars}"")
+	@VARS_TO_PRINT="$$(
+		paste -d " =" \
+			<(yes | head -n10 | xargs -n1 -I{} echo "  ") \
+			<(echo "$${var_names}") \
+			<(echo "$${vals}") \
+	)"
+	set -xv;
+	printf "%s\n" "$${VARS_TO_PRINT}"
+
+
+# printf -- "%s\n" "$${VARS_TO_PRINT}"
+
+# VARS_TO_PRINT=$$( \
+# 	paste -d '=' \
+# 		<(echo "$${var_names}") \
+# 		<(echo "$${vals}")
+# )
+
+# .ONESHELL: SHELL = /bin/bash
+# .ONESHELL: .SHELLFLAGS = -exv
+
+# vars="GIT_REV","DIR_NAME","PATH_FULL","PATH","DIR_NAME","MODULE_NAME","GOMAXPROCS","PARALLEL","GOLANGCI_LINT_VERSION","GOLANGCI_LINT_BINARY"
+# print_separator
+# VARS_TO_PRINT=$(
+#   paste -d '=' \
+#     <(echo "${var_names}") \
+#     <(echo "${vals}")
+# )
+# print_separator
+# printf -- "${INDENT}%b" \
+#   "${VARS_TO_PRINT}" $'\n'
+# print_separator
+
+# @printf '  %b' \
+# 	"${GREEN}PATH=${RESET}${PATH}" $$'\n' \
+# 	"${GREEN}DIR_NAME=${RESET}${DIR_NAME}" $$'\n' \
+# 	"${GREEN}VERBOSE=${RESET}${VERBOSE}" $$'\n' \
+# 	"${GREEN}CARGO_TERM_COLOR=${RESET}${CARGO_TERM_COLOR}" $$'\n' \
+# 	"${GREEN}CARGO_TERM_VERBOSE=${RESET}${CARGO_TERM_VERBOSE}" $$'\n'
+# echo "${GIT_REV}"
+# echo "${PATH}"
+# echo "${DIR_NAME}"
+# echo "${GOMAXPROCS}"
+# echo "${PARALLEL}"
+
+.PHONY: test
+test:
+	$(print_separator)
+	@# `-count=1`: cleans go test cache so tests are always re-run from fresh
+	GOMAXPROCS=${GOMAXPROCS} go test \
+		-parallel ${PARALLEL} \
+		-count=1 \
+		-v \
+		./...
+
+# https://stackoverflow.com/questions/6273608/how-to-pass-argument-to-makefile-from-command-line/6273809
+# https://stackoverflow.com/questions/2214575/passing-arguments-to-make-run
+.PHONY: run
+run:
+	@printf "%b" "${GREEN}" "  ---> running ...." "${RESET}" "\n"
+	go run cmd/${DIR_NAME}/main.go $(filter-out $@,$(MAKECMDGOALS))
+
+.PHONY: init
+init:
+	@printf "%b" "${GREEN}" "  ---> initialising ..." "${RESET}" "\n"
+	go mod download
+
+.PHONY: clean
+clean:
+	@printf "%b" "${GREEN}" "  ---> cleaning ..." "${RESET}" "\n"
+	@# Doesn't work?
+	-go clean -i -r -x -cache -testcache -modcache
+
+.PHONY: lint
+lint:
+	@printf "%b" "${GREEN}" "  ---> linting ..." "${RESET}" "\n"
+	@printf "%b" "${GREEN}" "  ---> ${GOLANGCI_LINT_BINARY} ..." "${RESET}" "\n"
+	@# Run golint instead?
+ifndef GOLANGCI_LINT_BINARY
+	@printf "%b" "${RED}" "  ---> installing golangci-lint@${GOLANGCI_LINT_VERSION} (https://github.com/golangci/golangci-lint) ..." "${RESET}" "\n"
+	@# binary will be $(go env GOPATH)/bin/golangci-lint
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(shell go env GOPATH)/bin ${GOLANGCI_LINT_VERSION}
+	# # or install it into ./bin/
+	# curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s ${GOLANGCI_LINT_VERSION}
+	# # In alpine linux (as it does not come with curl by default)
+	# wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s ${GOLANGCI_LINT_VERSION}
+endif
+	golangci-lint --version
+	golangci-lint run --verbose --fix --config ./.golangci.yml ./...
+
+.PHONY: format
+format:
+	@printf "%b" "${GREEN}" "  ---> formatting ..." "${RESET}" "\n"
+	go mod tidy
+	@for DIR in $(shell go list -f {{.Dir}} ./...); do \
+		printf "%b" "${GREEN}" "  ---> formatting dir=$${DIR} ..." "${RESET}" "\n"; \
+		goimports -v -e -w -local ${MODULE_NAME} $${DIR}/*.go; \
+	done
+
+XDG_OPEN_EXISTS := $(shell command -v xdg-open 2> /dev/null)
+
+.PHONY: image_debug
+image_debug:
+	@printf "%b" "${GREEN}" "  ---> debugging original image ..." "${RESET}" "\n"
+	rm -vr image_debug
+	mkdir -p image_debug
+	mkdir -p image_debug/originals
+	mkdir -p image_debug/gen
+	identify -verbose -monitor gen/0011.png > image_debug/gen/0011.txt
+	identify -verbose -monitor original_files/1337.png > image_debug/originals/1337_1.txt
+	vimdiff image_debug/originals/1337_1.txt image_debug/gen/0011.txt -c TOhtml -c 'w! image_debug/1337_vs_gen_0011.html|qa!'
+ifdef XDG_OPEN_EXISTS
+	xdg-open image_debug/1337_vs_gen_0011.html
+else
+	open image_debug/1337_vs_gen_0011.html
+endif
+
+
+.PHONY: image_debug_detail
+image_debug_detail:
+	@printf "%b" "${GREEN}" "  ---> debugging original image ..." "${RESET}" "\n"
+	rm -vr image_debug
+	mkdir -p image_debug
+	mkdir -p image_debug/originals
+	mkdir -p image_debug/gen
+
+	identify -verbose -monitor gen/0011.png > image_debug/gen/0011.txt
+
+	identify -verbose -monitor original_files/1337.png > image_debug/originals/1337_1.txt
+	identify -verbose -monitor -unique original_files/1337.png > image_debug/originals/1337_2.txt
+	identify -verbose -monitor -unique -ping original_files/1337.png > image_debug/originals/1337_3.txt
+	identify -verbose -monitor -unique -ping -moments original_files/1337.png > image_debug/originals/1337_4.txt
+
+	@# vimdiff image_debug/*.txt -c TOhtml -c 'w! image_debug/diff.html|qa!'
+	vimdiff image_debug/originals/1337_1.txt image_debug/gen/0011.txt -c TOhtml -c 'w! image_debug/1337_vs_gen_0011.html|qa!'
+ifdef XDG_OPEN_EXISTS
+	xdg-open image_debug/1337_vs_gen_0011.html
+else
+	open image_debug/1337_vs_gen_0011.html
+endif

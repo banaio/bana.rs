@@ -1,0 +1,126 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name = "httputil_reverseproxy"
+version = "0.0.1"
+authors = [
+  "Mohamed Bana <m@bana.io>",
+]
+license-file = "./LICENSE"
+description = "The implementation is based on Go's httputil.ReverseProxy (https://golang.org/pkg/net/http/httputil/#ReverseProxy)."
+repository = "https://github.com/banaio/httputil_reverseproxy.rs"
+homepage = "https://github.com/banaio/httputil_reverseproxy.rs"
+readme = "README.md"
+edition = "2018"
+keywords = [
+  "http",
+  "https",
+  "reverse-proxy",
+  "proxy",
+  "command-line-utilities"
+]
+categories = [
+  "http",
+  "https",
+  "reverse-proxy",
+  "proxy",
+  "command-line-utilities"
+]
+
+#[profile.release]
+#incremental = true
+#debug = true
+
+#[dependencies.hyper-reverse-proxy]
+#version = "0.4"
+
+# https://doc.rust-lang.org/rust-by-example/testing/dev_dependencies.html
+[dev-dependencies]
+pretty_assertions = "0.6.1"
+
+[dependencies]
+futures = { version = "0.3" }
+hyper = { version = "0.13" }
+hyper-tls = { version = "0.4", features = ["vendored"] }
+tokio = { version = "0.2", features = ["full"] }
+http = { version = "0.2" }
+
+tower = { version = "0.3.1", features = [ "log", "full" ] }
+#tower = { version = "0.3.1", features = [ "log", "balance", "buffer", "discover", "filter", "hedge", "limit", "load", "load-shed", "make", "ready-cache", "reconnect", "retry", "spawn-ready", "steer", "timeout", "util" ] }
+#tower-limit = "0.3.1"
+
+env_logger = "0.7.1"
+clap = "2.33.3"
+structopt = "0.3.17"
+term_size = "0.3.2"
+better-panic = "0.2.0"
+
+[dependencies.log]
+version = "0.4.11"
+features = ["std"]
+
+# https://github.com/drakulix/simplelog.rs
+[dependencies.simplelog]
+version = "0.7"
+# features = ["std"]
+
+# https://doc.rust-lang.org/cargo/reference/manifest.html#the-badges-section
+
+# https://doc.rust-lang.org/cargo/reference/profiles.html#profiles
+[profile.dev]
+opt-level = 0               # 0: no optimizations, also turns on cfg(debug_assertions). The opt-level setting controls the -C opt-level flag which controls the level of optimization. Higher optimization levels may produce faster runtime code at the expense of longer compiler times. Higher levels may also change and rearrange the compiled code which may make it harder to use with a debugger. The valid options are: - 0: no optimizations, also turns on cfg(debug_assertions) - 1: basic optimizations - 2: some optimizations - 3: all optimizations - "s": optimize for binary size - "z": optimize for binary size, but also turn off loop vectorization. It is recommended to experiment with different levels to find the right balance for your project. There may be surprising results, such as level 3 being slower than 2, or the "s" and "z" levels not being necessarily smaller. You may also want to reevaluate your settings over time as newer versions of rustc changes optimization behavior. See also Profile Guided Optimization for more advanced optimization techniques.
+debug = 2                   # 0/1/2: The debug setting controls the -C debuginfo flag which controls the amount of debug information included in the compiled binary. The valid options are: 0 or false: no debug info at all, 1: line tables only, 2 or true: full debug info
+overflow-checks = true      # true/false: The overflow-checks setting controls the -C overflow-checks flag which controls the behavior of runtime integer overflow. When overflow-checks are enabled, a panic will occur on overflow.
+debug-assertions = true     # true/false: The debug-assertions setting controls the -C debug-assertions flag which turns cfg(debug_assertions) conditional compilation on or off. Debug assertions are intended to include runtime validation which is only available in debug/development builds. These may be things that are too expensive or otherwise undesirable in a release build. Debug assertions enables the debug_assert! macro in the standard library.
+incremental = true          # true/false: The incremental setting controls the -C incremental flag which controls whether or not incremental compilation is enabled. Incremental compilation causes rustc to to save additional information to disk which will be reused when recompiling the crate, improving re-compile times. The additional information is stored in the target directory.
+panic = "unwind"            # The panic setting controls the -C panic flag which controls which panic strategy to use. The valid options are: - "unwind": Unwind the stack upon panic. - "abort": Terminate the process upon panic. - When set to "unwind", the actual value depends on the default of the target platform. For example, the NVPTX platform does not support unwinding, so it always uses "abort". Tests, benchmarks, build scripts, and proc macros ignore the panic setting. The rustc test harness currently requires unwind behavior. See the panic-abort-tests unstable flag which enables abort behavior. Additionally, when using the abort strateg
+lto = false                 # The lto setting controls the -C lto flag which controls LLVM's link time optimizations. LTO can produce better optimized code, using whole-program analysis, at the cost of longer linking time.\nThe valid options are:\n\nfalse: Performs "thin local LTO" which performs "thin" LTO on the local crate only across its codegen units. No LTO is performed if codegen units is 1 or opt-level is 0.\ntrue or "fat": Performs "fat" LTO which attempts to perform optimizations across all crates within the dependency graph.\n"thin": Performs "thin" LTO. This is similar to "fat", but takes substantially less time to run while still achieving performance gains similar to "fat".\n"off": Disables LTO.\nSee also the -C linker-plugin-lto rustc flag for cross-language LTO.\n
+
+[profile.test]
+opt-level = 0               # 0: no optimizations, also turns on cfg(debug_assertions). The opt-level setting controls the -C opt-level flag which controls the level of optimization. Higher optimization levels may produce faster runtime code at the expense of longer compiler times. Higher levels may also change and rearrange the compiled code which may make it harder to use with a debugger. The valid options are: - 0: no optimizations, also turns on cfg(debug_assertions) - 1: basic optimizations - 2: some optimizations - 3: all optimizations - "s": optimize for binary size - "z": optimize for binary size, but also turn off loop vectorization. It is recommended to experiment with different levels to find the right balance for your project. There may be surprising results, such as level 3 being slower than 2, or the "s" and "z" levels not being necessarily smaller. You may also want to reevaluate your settings over time as newer versions of rustc changes optimization behavior. See also Profile Guided Optimization for more advanced optimization techniques.
+debug = 2                   # 0/1/2: The debug setting controls the -C debuginfo flag which controls the amount of debug information included in the compiled binary. The valid options are: 0 or false: no debug info at all, 1: line tables only, 2 or true: full debug info
+overflow-checks = true      # true/false: The overflow-checks setting controls the -C overflow-checks flag which controls the behavior of runtime integer overflow. When overflow-checks are enabled, a panic will occur on overflow.
+debug-assertions = true     # true/false: The debug-assertions setting controls the -C debug-assertions flag which turns cfg(debug_assertions) conditional compilation on or off. Debug assertions are intended to include runtime validation which is only available in debug/development builds. These may be things that are too expensive or otherwise undesirable in a release build. Debug assertions enables the debug_assert! macro in the standard library.
+incremental = true          # true/false: The incremental setting controls the -C incremental flag which controls whether or not incremental compilation is enabled. Incremental compilation causes rustc to to save additional information to disk which will be reused when recompiling the crate, improving re-compile times. The additional information is stored in the target directory.
+# `panic` setting is ignored for `test` profile
+# panic = "unwind"            # The panic setting controls the -C panic flag which controls which panic strategy to use. The valid options are: - "unwind": Unwind the stack upon panic. - "abort": Terminate the process upon panic. - When set to "unwind", the actual value depends on the default of the target platform. For example, the NVPTX platform does not support unwinding, so it always uses "abort". Tests, benchmarks, build scripts, and proc macros ignore the panic setting. The rustc test harness currently requires unwind behavior. See the panic-abort-tests unstable flag which enables abort behavior. Additionally, when using the abort strateg
+lto = false                 # The lto setting controls the -C lto flag which controls LLVM's link time optimizations. LTO can produce better optimized code, using whole-program analysis, at the cost of longer linking time.\nThe valid options are:\n\nfalse: Performs "thin local LTO" which performs "thin" LTO on the local crate only across its codegen units. No LTO is performed if codegen units is 1 or opt-level is 0.\ntrue or "fat": Performs "fat" LTO which attempts to perform optimizations across all crates within the dependency graph.\n"thin": Performs "thin" LTO. This is similar to "fat", but takes substantially less time to run while still achieving performance gains similar to "fat".\n"off": Disables LTO.\nSee also the -C linker-plugin-lto rustc flag for cross-language LTO.\n
+
+[profile.bench]
+opt-level = 0               # 0: no optimizations, also turns on cfg(debug_assertions). The opt-level setting controls the -C opt-level flag which controls the level of optimization. Higher optimization levels may produce faster runtime code at the expense of longer compiler times. Higher levels may also change and rearrange the compiled code which may make it harder to use with a debugger. The valid options are: - 0: no optimizations, also turns on cfg(debug_assertions) - 1: basic optimizations - 2: some optimizations - 3: all optimizations - "s": optimize for binary size - "z": optimize for binary size, but also turn off loop vectorization. It is recommended to experiment with different levels to find the right balance for your project. There may be surprising results, such as level 3 being slower than 2, or the "s" and "z" levels not being necessarily smaller. You may also want to reevaluate your settings over time as newer versions of rustc changes optimization behavior. See also Profile Guided Optimization for more advanced optimization techniques.
+debug = 2                   # 0/1/2: The debug setting controls the -C debuginfo flag which controls the amount of debug information included in the compiled binary. The valid options are: 0 or false: no debug info at all, 1: line tables only, 2 or true: full debug info
+overflow-checks = true      # true/false: The overflow-checks setting controls the -C overflow-checks flag which controls the behavior of runtime integer overflow. When overflow-checks are enabled, a panic will occur on overflow.
+debug-assertions = true     # true/false: The debug-assertions setting controls the -C debug-assertions flag which turns cfg(debug_assertions) conditional compilation on or off. Debug assertions are intended to include runtime validation which is only available in debug/development builds. These may be things that are too expensive or otherwise undesirable in a release build. Debug assertions enables the debug_assert! macro in the standard library.
+incremental = true          # true/false: The incremental setting controls the -C incremental flag which controls whether or not incremental compilation is enabled. Incremental compilation causes rustc to to save additional information to disk which will be reused when recompiling the crate, improving re-compile times. The additional information is stored in the target directory.
+# `panic` setting is ignored for `bench` profile
+# panic = "unwind"            # The panic setting controls the -C panic flag which controls which panic strategy to use. The valid options are: - "unwind": Unwind the stack upon panic. - "abort": Terminate the process upon panic. - When set to "unwind", the actual value depends on the default of the target platform. For example, the NVPTX platform does not support unwinding, so it always uses "abort". Tests, benchmarks, build scripts, and proc macros ignore the panic setting. The rustc test harness currently requires unwind behavior. See the panic-abort-tests unstable flag which enables abort behavior. Additionally, when using the abort strateg
+lto = true                  # The lto setting controls the -C lto flag which controls LLVM's link time optimizations. LTO can produce better optimized code, using whole-program analysis, at the cost of longer linking time.\nThe valid options are:\n\nfalse: Performs "thin local LTO" which performs "thin" LTO on the local crate only across its codegen units. No LTO is performed if codegen units is 1 or opt-level is 0.\ntrue or "fat": Performs "fat" LTO which attempts to perform optimizations across all crates within the dependency graph.\n"thin": Performs "thin" LTO. This is similar to "fat", but takes substantially less time to run while still achieving performance gains similar to "fat".\n"off": Disables LTO.\nSee also the -C linker-plugin-lto rustc flag for cross-language LTO.\n
+
+[profile.release]
+opt-level = 3               # 0: no optimizations, also turns on cfg(debug_assertions). The opt-level setting controls the -C opt-level flag which controls the level of optimization. Higher optimization levels may produce faster runtime code at the expense of longer compiler times. Higher levels may also change and rearrange the compiled code which may make it harder to use with a debugger. The valid options are: - 0: no optimizations, also turns on cfg(debug_assertions) - 1: basic optimizations - 2: some optimizations - 3: all optimizations - "s": optimize for binary size - "z": optimize for binary size, but also turn off loop vectorization. It is recommended to experiment with different levels to find the right balance for your project. There may be surprising results, such as level 3 being slower than 2, or the "s" and "z" levels not being necessarily smaller. You may also want to reevaluate your settings over time as newer versions of rustc changes optimization behavior. See also Profile Guided Optimization for more advanced optimization techniques.
+debug = 2                   # 0/1/2: The debug setting controls the -C debuginfo flag which controls the amount of debug information included in the compiled binary. The valid options are: 0 or false: no debug info at all, 1: line tables only, 2 or true: full debug info
+overflow-checks = true      # true/false: The overflow-checks setting controls the -C overflow-checks flag which controls the behavior of runtime integer overflow. When overflow-checks are enabled, a panic will occur on overflow.
+debug-assertions = true     # true/false: The debug-assertions setting controls the -C debug-assertions flag which turns cfg(debug_assertions) conditional compilation on or off. Debug assertions are intended to include runtime validation which is only available in debug/development builds. These may be things that are too expensive or otherwise undesirable in a release build. Debug assertions enables the debug_assert! macro in the standard library.
+incremental = true          # true/false: The incremental setting controls the -C incremental flag which controls whether or not incremental compilation is enabled. Incremental compilation causes rustc to to save additional information to disk which will be reused when recompiling the crate, improving re-compile times. The additional information is stored in the target directory.
+panic = "unwind"            # The panic setting controls the -C panic flag which controls which panic strategy to use. The valid options are: - "unwind": Unwind the stack upon panic. - "abort": Terminate the process upon panic. - When set to "unwind", the actual value depends on the default of the target platform. For example, the NVPTX platform does not support unwinding, so it always uses "abort". Tests, benchmarks, build scripts, and proc macros ignore the panic setting. The rustc test harness currently requires unwind behavior. See the panic-abort-tests unstable flag which enables abort behavior. Additionally, when using the abort strateg
+lto = true                  # The lto setting controls the -C lto flag which controls LLVM's link time optimizations. LTO can produce better optimized code, using whole-program analysis, at the cost of longer linking time.\nThe valid options are:\n\nfalse: Performs "thin local LTO" which performs "thin" LTO on the local crate only across its codegen units. No LTO is performed if codegen units is 1 or opt-level is 0.\ntrue or "fat": Performs "fat" LTO which attempts to perform optimizations across all crates within the dependency graph.\n"thin": Performs "thin" LTO. This is similar to "fat", but takes substantially less time to run while still achieving performance gains similar to "fat".\n"off": Disables LTO.\nSee also the -C linker-plugin-lto rustc flag for cross-language LTO.\n
+
+# # https://vfoley.xyz/rust-compile-speed-tips/
+# # https://stackoverflow.com/questions/57812916/cargo-change-the-default-rustc-linker/57817848#57817848
+# # https://endler.dev/2020/rust-compile-times/
+# # https://doc.rust-lang.org/rustc/codegen-options/index.html
+# # https://doc.rust-lang.org/rustc/linker-plugin-lto.html#explicitly-specifying-the-linker-plugin-to-be-used-by-rustc
+# # https://blog.mozilla.org/nnethercote/2020/04/24/how-to-speed-up-the-rust-compiler-in-2020/
+# # https://github.com/rust-analyzer/rust-analyzer/pull/5813
+# # https://blog.dend.ro/my-rust-2020-wishlist/
+# [target.x86_64-unknown-linux-gnu]
+# # linker = "/usr/bin/clang"
+# rustflags = [
+#     # "-C", "linker=clang",
+#     # "-C", "link-arg=-fuse-ld=gold", # https://github.com/rust-gamedev/wg/issues/50
+#     # "-C", "linker=rust-lld",
+#     # "-C", "linker=ld.lld",
+#     # "-C", "linker=lld",
+#     "-C", "link-arg=-fuse-ld=lld",
+#     "-C", "lto=no",
+# ]

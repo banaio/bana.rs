@@ -1,0 +1,200 @@
+# Examples:
+# * https://github.com/rust-lang/cargo/blob/master/.github/workflows/main.yml
+name: rust_stable_beta_nightly_1_45_2
+on:
+  - push
+  - pull_request
+# on:
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
+defaults:
+  run:
+    shell: bash
+jobs:
+  continuous_integration:
+    env:
+      RUSTUP_PROFILE: 'minimal'
+      RUSTUP_COMPONENTS: 'cargo,clippy,rustfmt,rustfmt-preview'
+      CARGO_TERM_COLOR: always
+      CARGO_TERM_VERBOSE: 1
+      CARGO_PROFILE_DEV_DEBUG: 1
+      CARGO_PROFILE_TEST_DEBUG: 1
+      CARGO_INCREMENTAL: 0
+      TERM: 'xterm-256color'
+    continue-on-error: true
+    strategy:
+      max-parallel: 4
+      fail-fast: false
+      matrix:
+        rust:
+          - 1.45.2
+          # - nightly
+          # - beta
+          # - stable
+        os:
+          - ubuntu-20.04
+    runs-on: ${{ matrix.os }}
+    name: ${{ github.event.repository.name }}_${{ matrix.os }}_${{ matrix.rust }}
+    steps:
+      - name: environment_details - ${{ matrix.os }}_${{ matrix.rust }}
+        continue-on-error: true
+        shell: bash
+        run: |
+          printf -- "  %b" \
+            "uname -a=$(uname -a)" $'\n' \
+            "uname -s=$(uname -s)" $'\n'
+
+      - uses: actions/checkout@v2
+        continue-on-error: false
+
+      - name: ./scripts/install_lld.sh - ${{ matrix.os }}_${{ matrix.rust }}
+        continue-on-error: true
+        shell: bash
+        run: |
+          # set -euf \
+          #   -o nounset \
+          #   -o errexit \
+          #   -o noclobber \
+          #   -o pipefail
+          # shopt -s \
+          #   extglob \
+          #   globstar \
+          #   nullglob
+          export TERM="xterm-256color"
+          TERM="xterm-256color" ./scripts/install_lld.sh
+
+      - name: find lld and lld-10 - ${{ matrix.os }}_${{ matrix.rust }}
+        continue-on-error: true
+        shell: bash
+        run: |
+          LINKERS=$(find /usr/bin -iname '*lld*' -o -iname '*ld-10*')
+          LINKERS_TOTAL=$(echo "${LINKERS}" | wc -l)
+          echo "LINKERS=${LINKERS}"
+          echo "LINKERS_TOTAL=${LINKERS_TOTAL}"
+          printf -- "  %b" \
+            "LINKERS=${LINKERS//$'\n'/,}" $'\n' \
+            "LINKERS_TOTAL=${LINKERS_TOTAL}" $'\n'
+
+      - name: install toolchain profile=${{ env.RUSTUP_PROFILE }}, rust@${{ matrix.rust }}, components=${{ env.RUSTUP_COMPONENTS }}  - ${{ matrix.os }}_${{ matrix.rust }}
+        uses: actions-rs/toolchain@v1
+        continue-on-error: false
+        with:
+          override: true
+          profile: ${{ env.RUSTUP_PROFILE }}
+          components: ${{ env.RUSTUP_COMPONENTS }}
+          toolchain: ${{ matrix.rust }}
+          # target: ${{ matrix.target }}
+
+      - name: test - ${{ matrix.os }}_${{ matrix.rust }}
+        uses: actions-rs/cargo@v1
+        continue-on-error: true
+        with:
+          command: test
+          args: |
+            --workspace --release --no-fail-fast -- --test-threads=32 --nocapture --show-output
+
+      # # --target=${{ matrix.target }}
+      # - name: build - ${{ matrix.os }}_${{ matrix.rust }}
+      #   uses: actions-rs/cargo@v1
+      #   continue-on-error: false
+      #   with:
+      #     command: build
+      #     args: |
+      #       --workspace --release --jobs=32 --all-features
+
+      - name: cargo run -- --help - ${{ matrix.os }}_${{ matrix.rust }}
+        continue-on-error: true
+        run: |
+          cargo run -- --help
+
+# - name: check - ${{ matrix.os }}_${{ matrix.rust }}
+#   uses: actions-rs/cargo@v1
+#   continue-on-error: true
+#   with:
+#     command: check
+#     args: |
+#       --
+# - name: lint - ${{ matrix.os }}_${{ matrix.rust }}
+#   uses: actions-rs/cargo@v1
+#   continue-on-error: true
+#   with:
+#     command: clippy
+#     args: |
+#       --
+# - name: fmt - ${{ matrix.os }}_${{ matrix.rust }}
+#   uses: actions-rs/cargo@v1
+#   continue-on-error: true
+#   with:
+#     command: fmt
+#     args: |
+#       --all -- --check
+
+# env:
+#   RUSTUP_COMPONENTS: cargo,clippy,rustfmt,rustfmt-preview
+#   RUSTUP_PROFILE: minimal
+#   CARGO_TERM_COLOR: always
+#   CARGO_TERM_VERBOSE: 1
+#   # CARGO_INCREMENTAL: 1
+#   # RUSTFLAGS: "-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests"
+
+# os:
+#   - ubuntu-20.04
+#   # - ubuntu-16.04
+#   # - ubuntu-18.04
+#   # - ubuntu-latest
+#   # - macos-10.15
+#   # - macos-latest
+# # target:
+# #   - armv7-unknown-linux-gnueabihf
+# #   - powerpc64-unknown-linux-gnu
+# #   - nightly-x86_64-unknown-linux-gnu
+# #   - stable-x86_64-unknown-linux-gnu
+
+# # [[ -z "$TERM" ]] && export TERM=dumb           # Set a dummy terminal type if none set
+# # [[ ! -t 1 ]] && export TERM=dumb               # Set a dummy terminal type unless a tty
+# [[ -z "$TERM" ]] && export TERM="xterm-256color" # Set a xterm-256color terminal type if none set
+# [[ ! -t 1 ]] && export TERM="xterm-256color"     # Set a xterm-256color terminal type if none set
+# export text="environment_details=${{ matrix.os }}_${{ matrix.rust }}"
+# printf "%b" $(
+#   tput bold
+#   tput setaf 7
+#   tput setab 5
+# ) "${text}:" $() "  " $() $(printf -- '-%.0s' $(seq 1 $(expr $(tput cols) - "${#text}" - 3))) $(tput sgr0) "\n"
+# echo ${RUSTUP_PROFILE} || true
+# echo ${RUSTUP_COMPONENTS} || true
+# echo ${RUSTUP_COMPONENTS_TEST} || true
+
+# name: ${{ github.event.repository.name }}_${{ github.repository }}_${{ matrix.os }}_${{ matrix.rust }}
+# steps:
+#   - name: Dump GitHub context
+#     env:
+#       GITHUB_CONTEXT: ${{ toJson(github) }}
+#     run: echo "$GITHUB_CONTEXT"
+#   - name: Dump job context
+#     env:
+#       JOB_CONTEXT: ${{ toJson(job) }}
+#     run: echo "$JOB_CONTEXT"
+#   - name: Dump steps context
+#     env:
+#       STEPS_CONTEXT: ${{ toJson(steps) }}
+#     run: echo "$STEPS_CONTEXT"
+#   - name: Dump runner context
+#     env:
+#       RUNNER_CONTEXT: ${{ toJson(runner) }}
+#     run: echo "$RUNNER_CONTEXT"
+#   - name: Dump strategy context
+#     env:
+#       STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+#     run: echo "$STRATEGY_CONTEXT"
+#   - name: Dump matrix context
+#     env:
+#       MATRIX_CONTEXT: ${{ toJson(matrix) }}
+#     run: echo "$MATRIX_CONTEXT"
+
+# continuous_integration:
+#   env:
+#     RUSTUP_PROFILE: 'minimal'
+#     RUSTUP_COMPONENTS: 'cargo,clippy,rustfmt,rustfmt-preview'
+#     RUSTUP_COMPONENTS_TEST: ${{ 'cargo,clippy,rustfmt,rustfmt-preview' }}
